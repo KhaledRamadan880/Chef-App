@@ -1,0 +1,46 @@
+class AppStrings {
+  static const String welcome = 'Welcome to Chef App';
+  static const String selectLang = 'Please choose your language ';
+  static const String english = 'English';
+  static const String arabic = 'العربية';
+  static const String wecomeBack = 'Welcome Back';
+  static const String email = 'E-mail';
+  static const String password = 'Password';
+  static const String isForgetPass = 'forget password ?';
+  static const String forgetPass = 'Forget Password';
+  static const String chefApp = 'Chef App';
+  static const String signIn = 'Sign in';
+  static const String dontHaveAccount = 'Dont have an account?';
+  static const String signUp = 'Sign Up';
+  static const String createNewPass = 'Create New Password ';
+  static const String enterEmail =
+      'Enter Your mail and we will send you code to rest your password';
+  static const String sendCode = 'Send Code';
+  static const String newPass = 'New password';
+  static const String confirmPass = 'Confirm Password';
+  static const String code = 'Code';
+  static const String resetPass = 'Reset Password';
+  static const String khaledRamadan = 'Khaled Ramadan';
+  static const String khaledEmail = 'khaledramadan@gmail';
+  static const String editProfile = 'Edit Profile';
+  static const String settings = 'Settings';
+  static const String logout = 'Logout';
+  static const String name = 'Name';
+  static const String phone = 'Phone';
+  static const String brandName = 'Brand Name';
+  static const String miniCharge = 'Minimum Charge';
+  static const String description = 'Description';
+  static const String location = 'Location';
+  static const String update = 'Update';
+  static const String changePass = 'Change Password';
+  static const String oldPass = 'Old password';
+  static const String confirmNewPass = 'Confirm New password';
+  static const String addMeal = 'Add Meal';
+  static const String kitchen = 'Kitchen';
+  static const String chickenHint = 'Chicken hint';
+  static const String le200 = '200 LE';
+  static const String price = 'Price';
+  static const String category = 'Category';
+  static const String number = 'Number';
+  static const String quantity = 'Quantity';
+}
