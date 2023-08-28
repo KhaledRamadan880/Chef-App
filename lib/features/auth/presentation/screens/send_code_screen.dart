@@ -1,6 +1,7 @@
-import 'package:chef_app/core/common/custom_app_bar.dart';
-import 'package:chef_app/core/common/custom_text_field.dart';
-import 'package:chef_app/core/common/primary_button.dart';
+import 'package:chef_app/core/routes/routes.dart';
+import 'package:chef_app/core/util/widgets/custom_app_bar.dart';
+import 'package:chef_app/core/util/widgets/custom_text_field.dart';
+import 'package:chef_app/core/util/widgets/primary_button.dart';
 import 'package:chef_app/core/util/images.dart';
 import 'package:chef_app/core/util/strings.dart';
 import 'package:chef_app/core/util/theme/theme.dart';
@@ -39,7 +40,10 @@ class SendCodeScreen extends StatelessWidget {
               const CustomTextField(hint: AppStrings.email),
               SizedBox(height: 30.h),
               //! Send Code Button
-              const PrimaryButton(title: AppStrings.sendCode),
+              const PrimaryButton(
+                title: AppStrings.sendCode,
+                route: Routes.createNewPass,
+              ),
             ],
           ),
         ),

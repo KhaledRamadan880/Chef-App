@@ -1,3 +1,5 @@
+import 'package:chef_app/core/routes/routes.dart';
+import 'package:chef_app/core/util/commons.dart';
 import 'package:chef_app/core/util/images.dart';
 import 'package:chef_app/core/util/strings.dart';
 import 'package:chef_app/core/util/theme/theme.dart';
@@ -17,8 +19,11 @@ class ChangeLangScreen extends StatelessWidget {
         width: double.maxFinite,
         padding: EdgeInsets.symmetric(horizontal: 24.w),
         decoration: const BoxDecoration(
+          //! Background Image
           image: DecorationImage(
-              image: AssetImage(AppImages.bg1), fit: BoxFit.fill),
+            image: AssetImage(AppImages.bg1),
+            fit: BoxFit.fill,
+          ),
         ),
         child: Column(
           children: [
@@ -39,13 +44,23 @@ class ChangeLangScreen extends StatelessWidget {
             ),
             SizedBox(height: 120.h),
             //! Buttons Row
-            const Row(
+            Row(
               children: [
                 //! English Button
-                LangButton(title: AppStrings.english),
-                Spacer(),
+                LangButton(
+                  title: AppStrings.english,
+                  opPressed: () {
+                    navigate(context: context, route: Routes.login);
+                  },
+                ),
+                const Spacer(),
                 //! Arabic Row
-                LangButton(title: AppStrings.arabic),
+                LangButton(
+                  title: AppStrings.arabic,
+                  opPressed: () {
+                    navigate(context: context, route: Routes.login);
+                  },
+                ),
               ],
             ),
           ],

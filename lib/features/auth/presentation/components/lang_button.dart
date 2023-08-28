@@ -6,13 +6,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class LangButton extends StatelessWidget {
   
   final String title;
+  final VoidCallback opPressed;
 
-  const LangButton({super.key, required this.title});
+  const LangButton({super.key, required this.title, required this.opPressed});
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: opPressed,
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.black,
         fixedSize: Size(140.w, 48.h),

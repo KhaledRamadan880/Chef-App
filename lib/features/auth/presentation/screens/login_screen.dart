@@ -1,9 +1,11 @@
-import 'package:chef_app/core/common/custom_text_field.dart';
-import 'package:chef_app/core/common/primary_button.dart';
+import 'package:chef_app/core/routes/routes.dart';
+import 'package:chef_app/core/util/widgets/custom_text_field.dart';
+import 'package:chef_app/core/util/widgets/primary_button.dart';
 import 'package:chef_app/core/util/color.dart';
 import 'package:chef_app/core/util/images.dart';
 import 'package:chef_app/core/util/strings.dart';
 import 'package:chef_app/core/util/theme/theme.dart';
+import 'package:chef_app/features/auth/presentation/screens/send_code_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -58,7 +60,13 @@ class LoginScreen extends StatelessWidget {
                     Align(
                       alignment: Alignment.centerLeft,
                       child: TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const SendCodeScreen()));
+                        },
                         child: Text(
                           AppStrings.isForgetPass,
                           style: appTheme().textTheme.labelSmall!.copyWith(
@@ -69,7 +77,8 @@ class LoginScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 40.h),
                     //! Sign in Button
-                    const PrimaryButton(title: AppStrings.signIn),
+                    const PrimaryButton(
+                        title: AppStrings.signIn, route: Routes.menu),
                     SizedBox(height: 50.h),
                     //! Sign up Row
                     Row(

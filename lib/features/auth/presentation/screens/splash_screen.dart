@@ -1,11 +1,32 @@
+import 'package:chef_app/core/util/commons.dart';
 import 'package:chef_app/core/util/theme/theme.dart';
 import 'package:chef_app/core/util/color.dart';
 import 'package:chef_app/core/util/images.dart';
 import 'package:chef_app/core/util/strings.dart';
 import 'package:flutter/material.dart';
+import '../../../../core/routes/routes.dart';
 
-class SplashScreen extends StatelessWidget {
+
+class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+
+  //! Navigate Method 
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(
+      const Duration(seconds: 3),
+      () {        
+        navigate(context: context, route: Routes.changeLang);
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,8 +36,10 @@ class SplashScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            //! Logo
             Image.asset(AppImages.logo),
             const SizedBox(height: 16),
+            //! App Name
             Text(
               AppStrings.chefApp,
               style: appTheme().textTheme.bodyLarge,

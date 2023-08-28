@@ -1,6 +1,7 @@
-import 'package:chef_app/core/common/custom_app_bar.dart';
-import 'package:chef_app/core/common/custom_text_field.dart';
-import 'package:chef_app/core/common/primary_button.dart';
+import 'package:chef_app/core/routes/routes.dart';
+import 'package:chef_app/core/util/widgets/custom_app_bar.dart';
+import 'package:chef_app/core/util/widgets/custom_text_field.dart';
+import 'package:chef_app/core/util/widgets/primary_button.dart';
 import 'package:chef_app/core/util/images.dart';
 import 'package:chef_app/core/util/strings.dart';
 import 'package:chef_app/core/util/theme/theme.dart';
@@ -37,15 +38,20 @@ class CreateNewPassScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 24.h),
-                //! Email TextField
+                //! New Password TextField
                 const CustomTextField(hint: AppStrings.newPass),
                 SizedBox(height: 30.h),
+                //! Confirm Password TextField
                 const CustomTextField(hint: AppStrings.confirmPass),
                 SizedBox(height: 30.h),
+                //! Code TextField
                 const CustomTextField(hint: AppStrings.code),
                 SizedBox(height: 30.h),
-                //! Send Code Button
-                const PrimaryButton(title: AppStrings.resetPass),
+                //! Reset Button
+                const PrimaryButton(
+                  title: AppStrings.resetPass,
+                  route: Routes.login,
+                ),
               ],
             ),
           ),
