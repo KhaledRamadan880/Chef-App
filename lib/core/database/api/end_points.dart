@@ -24,10 +24,12 @@ class EndPoints {
 }
 
 class ApiKey{
-  static const String email = "email";
-  static const String password = "password";
-  static const String oldPass = "oldPass";
-  static const String newPass = "password";
-  static const String confirmPassword = "confirmPassword";
-  static const String code = "code";
+  static String email = "email";
+  static String password = "password";
+  static String oldPass = "oldPass";
+  static String newPass = "password";
+  static String confirmPassword = "confirmPassword";
+  static String code = "code";
+  static String message = "message";
+  static String token = "token";
 }
