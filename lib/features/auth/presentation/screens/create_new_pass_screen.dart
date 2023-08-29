@@ -22,7 +22,7 @@ class CreateNewPassScreen extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 40.h),
             child: Column(
               children: [
-                //! Lock IMage
+                //! Lock Image
                 Image.asset(
                   AppImages.lock,
                   height: 300.h,

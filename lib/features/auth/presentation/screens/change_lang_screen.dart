@@ -1,3 +1,5 @@
+import 'package:chef_app/core/bloc/cubit/global_cubit.dart';
+import 'package:chef_app/core/bloc/cubit/global_state.dart';
 import 'package:chef_app/core/database/local/app_locale.dart';
 import 'package:chef_app/core/routes/routes.dart';
 import 'package:chef_app/core/util/commons.dart';
@@ -5,6 +7,7 @@ import 'package:chef_app/core/util/images.dart';
 import 'package:chef_app/core/util/strings.dart';
 import 'package:chef_app/core/util/theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../components/lang_button.dart';
@@ -45,24 +48,30 @@ class ChangeLangScreen extends StatelessWidget {
             ),
             SizedBox(height: 120.h),
             //! Buttons Row
-            Row(
-              children: [
-                //! English Button
-                LangButton(
-                  title: AppStrings.engliash.tr(context),
-                  opPressed: () {
-                    navigate(context: context, route: Routes.login);
-                  },
-                ),
-                const Spacer(),
-                //! Arabic Row
-                LangButton(
-                  title: AppStrings.arabic.tr(context),
-                  opPressed: () {
-                    navigate(context: context, route: Routes.login);
-                  },
-                ),
-              ],
+            BlocBuilder<GlobalCubit, GlobalState>(
+              builder: (context, state) {
+                return Row(
+                  children: [
+                    //! English Button
+                    LangButton(
+                      title: AppStrings.engliash.tr(context),
+                      opPressed: () {
+                        BlocProvider.of<GlobalCubit>(context).changeLang('en');
+                        // navigate(context: context, route: Routes.login);
+                      },
+                    ),
+                    const Spacer(),
+                    //! Arabic Row
+                    LangButton(
+                      title: AppStrings.arabic.tr(context),
+                      opPressed: () {
+                        BlocProvider.of<GlobalCubit>(context).changeLang('ar');
+                        // navigate(context: context, route: Routes.login);
+                      },
+                    ),
+                  ],
+                );
+              },
             ),
           ],
         ),

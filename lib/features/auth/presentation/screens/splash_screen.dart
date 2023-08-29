@@ -1,3 +1,4 @@
+import 'package:chef_app/core/database/local/app_locale.dart';
 import 'package:chef_app/core/util/commons.dart';
 import 'package:chef_app/core/util/theme/theme.dart';
 import 'package:chef_app/core/util/color.dart';
@@ -41,7 +42,7 @@ class _SplashScreenState extends State<SplashScreen> {
             const SizedBox(height: 16),
             //! App Name
             Text(
-              AppStrings.chefApp,
+              AppStrings.chefApp.tr(context),
               style: appTheme().textTheme.bodyLarge,
             )
           ],
