@@ -1,3 +1,4 @@
+import 'package:chef_app/core/database/local/app_locale.dart';
 import 'package:chef_app/core/routes/routes.dart';
 import 'package:chef_app/core/util/widgets/custom_app_bar.dart';
 import 'package:chef_app/core/util/widgets/custom_text_field.dart';
@@ -14,7 +15,7 @@ class SendCodeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(title: AppStrings.forgetPass),
+      appBar: customAppBar(title: AppStrings.forgetPassword.tr(context)),
       body: Center(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 40.h),
@@ -29,7 +30,7 @@ class SendCodeScreen extends StatelessWidget {
               SizedBox(height: 26.h),
               //! Title
               Text(
-                AppStrings.enterEmail,
+                AppStrings.pleaseEnterValidEmail.tr(context),
                 textAlign: TextAlign.center,
                 style: appTheme().textTheme.bodySmall!.copyWith(
                       fontSize: 16,
@@ -37,11 +38,11 @@ class SendCodeScreen extends StatelessWidget {
               ),
               SizedBox(height: 26.h),
               //! Email TextField
-              const CustomTextField(hint: AppStrings.email),
+               CustomTextField(hint: AppStrings.email.tr(context)),
               SizedBox(height: 30.h),
               //! Send Code Button
-              const PrimaryButton(
-                title: AppStrings.sendCode,
+              PrimaryButton(
+                title: AppStrings.sendResetLink.tr(context),
                 route: Routes.createNewPass,
               ),
             ],

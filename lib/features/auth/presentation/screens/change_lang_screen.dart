@@ -1,3 +1,4 @@
+import 'package:chef_app/core/database/local/app_locale.dart';
 import 'package:chef_app/core/routes/routes.dart';
 import 'package:chef_app/core/util/commons.dart';
 import 'package:chef_app/core/util/images.dart';
@@ -33,13 +34,13 @@ class ChangeLangScreen extends StatelessWidget {
             SizedBox(height: 16.h),
             //! Title 1
             Text(
-              AppStrings.welcome,
+              AppStrings.welcomeToChefApp.tr(context),
               style: appTheme().textTheme.bodyMedium,
             ),
             SizedBox(height: 54.h),
             //! Title 2
             Text(
-              AppStrings.selectLang,
+              AppStrings.pleaseChooseYourLanguage.tr(context),
               style: appTheme().textTheme.bodySmall,
             ),
             SizedBox(height: 120.h),
@@ -48,7 +49,7 @@ class ChangeLangScreen extends StatelessWidget {
               children: [
                 //! English Button
                 LangButton(
-                  title: AppStrings.english,
+                  title: AppStrings.engliash.tr(context),
                   opPressed: () {
                     navigate(context: context, route: Routes.login);
                   },
@@ -56,7 +57,7 @@ class ChangeLangScreen extends StatelessWidget {
                 const Spacer(),
                 //! Arabic Row
                 LangButton(
-                  title: AppStrings.arabic,
+                  title: AppStrings.arabic.tr(context),
                   opPressed: () {
                     navigate(context: context, route: Routes.login);
                   },

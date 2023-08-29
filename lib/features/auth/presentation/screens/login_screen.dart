@@ -1,3 +1,4 @@
+import 'package:chef_app/core/database/local/app_locale.dart';
 import 'package:chef_app/core/routes/routes.dart';
 import 'package:chef_app/core/util/widgets/custom_text_field.dart';
 import 'package:chef_app/core/util/widgets/primary_button.dart';
@@ -31,7 +32,7 @@ class LoginScreen extends StatelessWidget {
               ),
               child: Center(
                 child: Text(
-                  AppStrings.wecomeBack,
+                  AppStrings.welcomeBack.tr(context),
                   style: appTheme().textTheme.bodyMedium!.copyWith(
                         color: AppColors.white,
                       ),
@@ -46,13 +47,13 @@ class LoginScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     //! Email TextField
-                    const CustomTextField(
-                      hint: AppStrings.email,
+                    CustomTextField(
+                      hint: AppStrings.email.tr(context),
                     ),
                     SizedBox(height: 48.h),
                     //! Password TextField
-                    const CustomTextField(
-                      hint: AppStrings.password,
+                    CustomTextField(
+                      hint: AppStrings.password.tr(context),
                       suffixShow: true,
                       obscure: true,
                     ),
@@ -68,7 +69,7 @@ class LoginScreen extends StatelessWidget {
                                       const SendCodeScreen()));
                         },
                         child: Text(
-                          AppStrings.isForgetPass,
+                          AppStrings.forgetPassword.tr(context),
                           style: appTheme().textTheme.labelSmall!.copyWith(
                                 color: AppColors.grey,
                               ),
@@ -77,22 +78,22 @@ class LoginScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 40.h),
                     //! Sign in Button
-                    const PrimaryButton(
-                        title: AppStrings.signIn, route: Routes.menu),
+                    PrimaryButton(
+                        title: AppStrings.signIn.tr(context), route: Routes.menu),
                     SizedBox(height: 50.h),
                     //! Sign up Row
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          AppStrings.dontHaveAccount,
+                          AppStrings.dontHaveAnAccount.tr(context),
                           style: appTheme().textTheme.labelMedium,
                         ),
                         //! Sign up Button
                         TextButton(
                           onPressed: () {},
                           child: Text(
-                            AppStrings.signUp,
+                            AppStrings.signUp.tr(context),
                             style: appTheme().textTheme.labelMedium!.copyWith(
                                 color: AppColors.primary,
                                 fontWeight: FontWeight.w400),

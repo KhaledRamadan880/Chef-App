@@ -1,3 +1,4 @@
+import 'package:chef_app/core/database/local/app_locale.dart';
 import 'package:chef_app/core/routes/routes.dart';
 import 'package:chef_app/core/util/widgets/custom_app_bar.dart';
 import 'package:chef_app/core/util/widgets/custom_text_field.dart';
@@ -14,7 +15,7 @@ class CreateNewPassScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(title: AppStrings.createNewPass),
+      appBar: customAppBar(title: AppStrings.createYourNewPassword.tr(context)),
       body: SingleChildScrollView(
         child: Center(
           child: Padding(
@@ -31,7 +32,7 @@ class CreateNewPassScreen extends StatelessWidget {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    AppStrings.createNewPass,
+                    AppStrings.createYourNewPassword.tr(context),
                     style: appTheme().textTheme.bodySmall!.copyWith(
                           fontSize: 16,
                         ),
@@ -39,17 +40,17 @@ class CreateNewPassScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 24.h),
                 //! New Password TextField
-                const CustomTextField(hint: AppStrings.newPass),
+                CustomTextField(hint: AppStrings.newPassword.tr(context)),
                 SizedBox(height: 30.h),
                 //! Confirm Password TextField
-                const CustomTextField(hint: AppStrings.confirmPass),
+                CustomTextField(hint: AppStrings.confirmPassword.tr(context)),
                 SizedBox(height: 30.h),
                 //! Code TextField
                 const CustomTextField(hint: AppStrings.code),
                 SizedBox(height: 30.h),
                 //! Reset Button
-                const PrimaryButton(
-                  title: AppStrings.resetPass,
+                PrimaryButton(
+                  title: AppStrings.sendResetLink.tr(context),
                   route: Routes.login,
                 ),
               ],
