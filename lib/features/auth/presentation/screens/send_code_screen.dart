@@ -38,13 +38,14 @@ class SendCodeScreen extends StatelessWidget {
               ),
               SizedBox(height: 26.h),
               //! Email TextField
-               CustomTextField(hint: AppStrings.email.tr(context)),
+              //  CustomTextField(
+              //   hint: AppStrings.email.tr(context)),
               SizedBox(height: 30.h),
               //! Send Code Button
-              PrimaryButton(
-                title: AppStrings.sendResetLink.tr(context),
-                route: Routes.createNewPass,
-              ),
+              // PrimaryButton(
+              //   title: AppStrings.sendResetLink.tr(context),
+              //   route: Routes.createNewPass,
+              // ),
             ],
           ),
         ),

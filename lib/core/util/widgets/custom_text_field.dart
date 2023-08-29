@@ -1,43 +1,41 @@
 import 'package:chef_app/core/util/color.dart';
-import 'package:chef_app/core/util/icons.dart';
 import 'package:chef_app/core/util/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
   final String hint;
+  final TextEditingController controller;
   final bool suffixShow;
   final bool obscure;
+  final Widget suffixIcon;
+  final String? Function(String?)? validator;
 
   const CustomTextField({
     super.key,
     required this.hint,
+    required this.controller,
     this.suffixShow = false,
     this.obscure = false,
+    this.suffixIcon = const Text(''),
+    required this.validator,
   });
 
-  final bool isVisible = false;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      validator: validator,
+      controller: controller,
       cursorColor: AppColors.darkGrey,
       obscureText: obscure,
       decoration: InputDecoration(
+        errorStyle: const TextStyle(fontSize: 16),      
         hintText: hint,
         hintStyle: appTheme().textTheme.bodySmall!.copyWith(
               color: AppColors.darkGrey,
               fontSize: 16,
             ),
         contentPadding: const EdgeInsets.all(16),
-        suffixIcon: suffixShow == true
-            ? IconButton(
-                onPressed: () {
-                  isVisible != isVisible;
-                },
-                icon: isVisible == true
-                    ? AppIcons.passwordShow
-                    : AppIcons.passwordHide,
-              )
-            : null,
+        suffixIcon: suffixIcon,
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
           borderSide: const BorderSide(

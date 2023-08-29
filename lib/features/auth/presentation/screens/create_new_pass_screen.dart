@@ -40,19 +40,19 @@ class CreateNewPassScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 24.h),
                 //! New Password TextField
-                CustomTextField(hint: AppStrings.newPassword.tr(context)),
-                SizedBox(height: 30.h),
-                //! Confirm Password TextField
-                CustomTextField(hint: AppStrings.confirmPassword.tr(context)),
-                SizedBox(height: 30.h),
-                //! Code TextField
-                const CustomTextField(hint: AppStrings.code),
+                // CustomTextField(hint: AppStrings.newPassword.tr(context)),
+                // SizedBox(height: 30.h),
+                // //! Confirm Password TextField
+                // CustomTextField(hint: AppStrings.confirmPassword.tr(context)),
+                // SizedBox(height: 30.h),
+                // //! Code TextField
+                // const CustomTextField(hint: AppStrings.code),
                 SizedBox(height: 30.h),
                 //! Reset Button
-                PrimaryButton(
-                  title: AppStrings.sendResetLink.tr(context),
-                  route: Routes.login,
-                ),
+                // PrimaryButton(
+                //   title: AppStrings.sendResetLink.tr(context),
+                //   route: Routes.login,
+                // ),
               ],
             ),
           ),

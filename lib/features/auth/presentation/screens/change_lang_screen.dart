@@ -57,7 +57,7 @@ class ChangeLangScreen extends StatelessWidget {
                       title: AppStrings.engliash.tr(context),
                       opPressed: () {
                         BlocProvider.of<GlobalCubit>(context).changeLang('en');
-                        // navigate(context: context, route: Routes.login);
+                        navigate(context: context, route: Routes.login);
                       },
                     ),
                     const Spacer(),
@@ -66,7 +66,7 @@ class ChangeLangScreen extends StatelessWidget {
                       title: AppStrings.arabic.tr(context),
                       opPressed: () {
                         BlocProvider.of<GlobalCubit>(context).changeLang('ar');
-                        // navigate(context: context, route: Routes.login);
+                        navigate(context: context, route: Routes.login);
                       },
                     ),
                   ],
