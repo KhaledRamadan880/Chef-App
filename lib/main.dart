@@ -15,6 +15,6 @@ void main() async {
 
   runApp(MultiBlocProvider(providers: [
     BlocProvider(create: (context) => sl<GlobalCubit>()),
-    BlocProvider(create: (context) => sl<LoginCubit>()),
+    BlocProvider(create: (context) => sl<LoginCubit>())
   ], child: const MyApp()));
 }
