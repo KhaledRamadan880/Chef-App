@@ -7,10 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class GlobalCubit extends Cubit<GlobalState> {
   GlobalCubit() : super(GlobalInitial());
 
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passController = TextEditingController();
-  GlobalKey<FormState> loginKey = GlobalKey<FormState>();
-
+ 
   //! Password TextField Suffix
   bool isVisible = false;
   bool obscured = true;

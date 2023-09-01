@@ -9,6 +9,8 @@ import 'package:chef_app/core/util/color.dart';
 import 'package:chef_app/core/util/images.dart';
 import 'package:chef_app/core/util/strings.dart';
 import 'package:chef_app/core/util/theme/theme.dart';
+import 'package:chef_app/features/auth/presentation/cubits/cubit/login_cubit.dart';
+import 'package:chef_app/features/auth/presentation/cubits/cubit/login_state.dart';
 import 'package:chef_app/features/auth/presentation/screens/send_code_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -45,17 +47,17 @@ class LoginScreen extends StatelessWidget {
             ),
             const SizedBox(height: 80),
             //! Form
-            BlocBuilder<GlobalCubit, GlobalState>(
+            BlocBuilder<LoginCubit, LoginState>(
               builder: (context, state) {
                 return Form(
-                  key: BlocProvider.of<GlobalCubit>(context).loginKey,
+                  key: BlocProvider.of<LoginCubit>(context).loginKey,
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 24.h),
                     child: Column(
                       children: [
                         //! Email TextField
                         CustomTextField(
-                          controller: BlocProvider.of<GlobalCubit>(context)
+                          controller: BlocProvider.of<LoginCubit>(context)
                               .emailController,
                           hint: AppStrings.email.tr(context),
                           validator: (value) {
@@ -69,21 +71,25 @@ class LoginScreen extends StatelessWidget {
                         ),
                         SizedBox(height: 48.h),
                         // //! Password TextField
-                        CustomTextField(
-                          controller: BlocProvider.of<GlobalCubit>(context)
-                              .passController,
-                          hint: AppStrings.password.tr(context),
-                          suffixShow: true,
-                          obscure:
-                              BlocProvider.of<GlobalCubit>(context).obscured,
-                          suffixIcon: BlocProvider.of<GlobalCubit>(context)
-                              .suffixIcon(),
-                          validator: (value) {
-                            if (value!.isEmpty || value.length <= 6) {
-                              return AppStrings.pleaseEnterValidPassword
-                                  .tr(context);
-                            }
-                            return null;
+                        BlocBuilder<GlobalCubit, GlobalState>(
+                          builder: (context, state) {
+                            return CustomTextField(
+                              controller: BlocProvider.of<LoginCubit>(context)
+                                  .passController,
+                              hint: AppStrings.password.tr(context),
+                              suffixShow: true,
+                              obscure: BlocProvider.of<GlobalCubit>(context)
+                                  .obscured,
+                              suffixIcon: BlocProvider.of<GlobalCubit>(context)
+                                  .suffixIcon(),
+                              validator: (value) {
+                                if (value!.isEmpty || value.length <= 6) {
+                                  return AppStrings.pleaseEnterValidPassword
+                                      .tr(context);
+                                }
+                                return null;
+                              },
+                            );
                           },
                         ),
                         //! Forget Password
@@ -111,12 +117,12 @@ class LoginScreen extends StatelessWidget {
                           title: AppStrings.signIn.tr(context),
                           route: Routes.menu,
                           onPressed: () {
-                            if (BlocProvider.of<GlobalCubit>(context)
+                            if (BlocProvider.of<LoginCubit>(context)
                                 .loginKey
                                 .currentState!
                                 .validate()) {
-                              // navigate(context: context, route: Routes.menu);
-                              navigate(context: context, route: '/menu');
+                              BlocProvider.of<LoginCubit>(context).login();
+                              // navigate(context: context, route: '/menu');
                             }
                           },
                         ),
