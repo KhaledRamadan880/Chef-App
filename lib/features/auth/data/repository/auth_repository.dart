@@ -11,13 +11,18 @@ class AuthRepository {
     required String password,
   }) async {
     try {
-      final response = await sl<ApiConsumer>().post(EndPoints.signIn, data: {
-        ApiKey.email = email,
-        ApiKey.password = password,
-      });
-      return Right(LoginModel.fromJson(response));
+      final response = await sl<ApiConsumer>().post(
+        EndPoints.signIn,
+        data: {
+          ApiKeys.email : email,
+          ApiKeys.password : password,
+        },
+      );
+      return Right(LoginModel.fromJson(response.data));
     } on ServerExceptions catch (e) {
-      return Left(e.errorModel.errorMessage);
+      return Left(e.errorModel.errorMessage); //
+    } catch (e) {
+      return Left(e.toString());
     }
   }
 }

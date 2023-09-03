@@ -23,9 +23,9 @@ class EndPoints {
   }
 }
 
-class ApiKey{
-  static String email = "email";
-  static String password = "password";
+class ApiKeys{
+  static String email = 'email';
+  static String password = 'password';
   static String oldPass = "oldPass";
   static String newPass = "password";
   static String confirmPassword = "confirmPassword";

@@ -122,7 +122,7 @@ class LoginScreen extends StatelessWidget {
                                 .currentState!
                                 .validate()) {
                               BlocProvider.of<LoginCubit>(context).login();
-                              // navigate(context: context, route: '/menu');
+                              navigate(context: context, route: '/menu');
                             }
                           },
                         ),
