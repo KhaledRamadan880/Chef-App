@@ -9,15 +9,17 @@ ThemeData appTheme() {
       bodyLarge: GoogleFonts.lato(
         fontSize: 36,
         fontWeight: FontWeight.w700,
+        color: AppColors.white,
       ),
       bodyMedium: GoogleFonts.lato(
         fontSize: 32,
         fontWeight: FontWeight.w700,
+        color: AppColors.white,
       ),
       bodySmall: GoogleFonts.lato(
         fontSize: 24,
         fontWeight: FontWeight.w400,
-        color: AppColors.black,
+        color: AppColors.white,
       ),
       labelLarge: GoogleFonts.poppins(
         fontSize: 24,
