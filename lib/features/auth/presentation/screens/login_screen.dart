@@ -3,6 +3,7 @@ import 'package:chef_app/core/bloc/cubit/global_state.dart';
 import 'package:chef_app/core/database/local/app_locale.dart';
 import 'package:chef_app/core/routes/routes.dart';
 import 'package:chef_app/core/util/commons.dart';
+import 'package:chef_app/core/util/widgets/custom_loading_indicator.dart';
 import 'package:chef_app/core/util/widgets/custom_text_field.dart';
 import 'package:chef_app/core/util/widgets/primary_button.dart';
 import 'package:chef_app/core/util/color.dart';
@@ -113,19 +114,22 @@ class LoginScreen extends StatelessWidget {
                         ),
                         SizedBox(height: 40.h),
                         //! Sign in Button
-                        PrimaryButton(
-                          title: AppStrings.signIn.tr(context),
-                          route: Routes.menu,
-                          onPressed: () {
-                            if (BlocProvider.of<LoginCubit>(context)
-                                .loginKey
-                                .currentState!
-                                .validate()) {
-                              BlocProvider.of<LoginCubit>(context).login();
-                              navigate(context: context, route: '/menu');
-                            }
-                          },
-                        ),
+                        state is LoginLoadingState
+                            ? const CustomLoadingIndicator()
+                            : PrimaryButton(
+                                title: AppStrings.signIn.tr(context),
+                                route: Routes.menu,
+                                onPressed: () {
+                                  if (BlocProvider.of<LoginCubit>(context)
+                                      .loginKey
+                                      .currentState!
+                                      .validate()) {
+                                    BlocProvider.of<LoginCubit>(context)
+                                        .login();
+                                    // navigate(context: context, route: '/menu');
+                                  }
+                                },
+                              ),
                         SizedBox(height: 50.h),
                         //! Sign up Row
                         Row(
