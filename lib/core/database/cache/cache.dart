@@ -7,7 +7,7 @@ class Cache {
     sharedPreferences = await SharedPreferences.getInstance();
   }
 
-  void setData(String key, dynamic value) async {
+  Future<dynamic> setData(String key, dynamic value) async {
     if (value is int) {
       await sharedPreferences.setInt(key, value);
     } else if (value is double) {

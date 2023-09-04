@@ -1,3 +1,6 @@
+import 'package:chef_app/core/database/api/end_points.dart';
+import 'package:chef_app/core/database/cache/cache.dart';
+import 'package:chef_app/core/services/service_locator.dart';
 import 'package:chef_app/features/auth/data/model/login_model.dart';
 import 'package:chef_app/features/auth/data/repository/auth_repository.dart';
 import 'package:chef_app/features/auth/presentation/cubits/cubit/login_state.dart';
@@ -23,8 +26,9 @@ class LoginCubit extends Cubit<LoginState> {
     );
     res.fold(
       (l) => emit(LoginErrorState(l)),
-      (r) {
+      (r) async {
         loginModel = r;
+        await sl<Cache>().setData(ApiKeys.token, r.token);        
         emit(LoginSuccessState());
       },
     );
