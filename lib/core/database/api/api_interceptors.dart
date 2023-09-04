@@ -14,9 +14,9 @@ class ApiInterCeptors extends Interceptor {
   }
 
   @override
-  void onResponse(Response response, ResponseInterceptorHandler handler) {
-    // TODO: implement onResponse
+  void onResponse(Response response, ResponseInterceptorHandler handler) {    
     super.onResponse(response, handler);
+    // return handler.next(response);
   }
 
   @override

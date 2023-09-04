@@ -7,11 +7,9 @@ class PrimaryButton extends StatelessWidget {
   const PrimaryButton({
     super.key,
     required this.title,
-    required this.route,
     required this.onPressed,
   });
   final String title;
-  final String route;
   final VoidCallback onPressed;
 
   @override

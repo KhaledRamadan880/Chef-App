@@ -10,9 +10,8 @@ import 'package:chef_app/core/util/color.dart';
 import 'package:chef_app/core/util/images.dart';
 import 'package:chef_app/core/util/strings.dart';
 import 'package:chef_app/core/util/theme/theme.dart';
-import 'package:chef_app/features/auth/presentation/cubits/cubit/login_cubit.dart';
-import 'package:chef_app/features/auth/presentation/cubits/cubit/login_state.dart';
-import 'package:chef_app/features/auth/presentation/screens/send_code_screen.dart';
+import 'package:chef_app/features/auth/presentation/cubits/login_cubit/login_cubit.dart';
+import 'package:chef_app/features/auth/presentation/cubits/login_cubit/login_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -51,7 +50,9 @@ class LoginScreen extends StatelessWidget {
             BlocConsumer<LoginCubit, LoginState>(
               listener: (context, state) {
                 if (state is LoginSuccessState) {
-                  toast(message: AppStrings.loginSucessfully, state: ToastStates.success);
+                  toast(
+                      message: AppStrings.loginSucessfully,
+                      state: ToastStates.success);
                 }
                 if (state is LoginErrorState) {
                   toast(message: state.message, state: ToastStates.error);
@@ -106,11 +107,8 @@ class LoginScreen extends StatelessWidget {
                           alignment: Alignment.centerLeft,
                           child: TextButton(
                             onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const SendCodeScreen()));
+                              navigate(
+                                  context: context, route: Routes.sendCode);
                             },
                             child: Text(
                               AppStrings.forgetPassword.tr(context),
@@ -125,8 +123,7 @@ class LoginScreen extends StatelessWidget {
                         state is LoginLoadingState
                             ? const CustomLoadingIndicator()
                             : PrimaryButton(
-                                title: AppStrings.signIn.tr(context),
-                                route: Routes.menu,
+                                title: AppStrings.signIn.tr(context),                                
                                 onPressed: () {
                                   if (BlocProvider.of<LoginCubit>(context)
                                       .loginKey

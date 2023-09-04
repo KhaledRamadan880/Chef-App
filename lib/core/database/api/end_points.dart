@@ -15,21 +15,23 @@ class EndPoints {
   static String chefGetEndPoint(id) {
     return '$chefGEt$id';
   }
+
   static String updateMealEndPoint(id) {
     return '$updateMeal$id';
   }
+
   static String deleteMealEndPoint(id) {
     return '$updateMeal$id';
   }
 }
 
-class ApiKeys{
+class ApiKeys {
   static String email = 'email';
   static String password = 'password';
   static String oldPass = "oldPass";
   static String newPass = "password";
   static String confirmPassword = "confirmPassword";
   static String code = "code";
-  static String message = "message";
-  static String token = "token";
+  static String message = 'message';
+  static String token = 'token';
 }

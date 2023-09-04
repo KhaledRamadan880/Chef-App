@@ -17,7 +17,7 @@ class CustomTextField extends StatelessWidget {
     this.suffixShow = false,
     this.obscure = false,
     this.suffixIcon = const Text(''),
-    required this.validator,
+    this.validator,
   });
 
   @override

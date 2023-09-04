@@ -20,6 +20,7 @@
     "newPassword": "كلمة المرور الجديدة",
     "oldPassword": "كلمة المرور القديمة",
     "code": "الكود",
+    "sendCode": "إرسال الكود",
     "description": "اكتب بعض الوصف",
     "profile": "الملف الشخصي",
     "confirm": "تأكيد",

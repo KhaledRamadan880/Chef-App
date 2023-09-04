@@ -3,7 +3,7 @@ import 'package:chef_app/core/database/cache/cache.dart';
 import 'package:chef_app/core/services/service_locator.dart';
 import 'package:chef_app/features/auth/data/model/login_model.dart';
 import 'package:chef_app/features/auth/data/repository/auth_repository.dart';
-import 'package:chef_app/features/auth/presentation/cubits/cubit/login_state.dart';
+import 'package:chef_app/features/auth/presentation/cubits/login_cubit/login_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
