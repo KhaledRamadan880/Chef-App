@@ -14,10 +14,10 @@ void toast({required String message, required ToastStates state}) {
   Fluttertoast.showToast(
     msg: message,
     toastLength: Toast.LENGTH_LONG,
-    gravity: ToastGravity.CENTER,
+    gravity: ToastGravity.BOTTOM,
     textColor: AppColors.white,
     fontSize: 18,
-    timeInSecForIosWeb: 1,
+    timeInSecForIosWeb: 3,
     backgroundColor: getState(state),
   );
 }
