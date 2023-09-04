@@ -107,7 +107,7 @@ class LoginScreen extends StatelessWidget {
                           alignment: Alignment.centerLeft,
                           child: TextButton(
                             onPressed: () {
-                              navigate(
+                              navigateReplacement(
                                   context: context, route: Routes.sendCode);
                             },
                             child: Text(

@@ -1,4 +1,5 @@
 import 'package:chef_app/core/database/local/app_locale.dart';
+import 'package:chef_app/core/routes/routes.dart';
 import 'package:chef_app/core/util/color.dart';
 import 'package:chef_app/core/util/commons.dart';
 import 'package:chef_app/core/util/widgets/custom_app_bar.dart';
@@ -20,7 +21,11 @@ class SendCodeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(title: AppStrings.sendCode.tr(context)),
+      appBar: customAppBar(
+        title: AppStrings.sendCode.tr(context),
+        context: context,
+        route: Routes.login,
+      ),
       body: SingleChildScrollView(
         child: Center(
           child: Padding(
@@ -28,11 +33,8 @@ class SendCodeScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                //! Lock IMage
-                Image.asset(
-                  AppImages.lock,
-                  height: 300.h,
-                ),
+                //! Lock Image
+                Image.asset(AppImages.lock, height: 300.h),
                 SizedBox(height: 26.h),
                 //! Title
                 Text(
@@ -48,6 +50,8 @@ class SendCodeScreen extends StatelessWidget {
                   listener: (context, state) {
                     if (state is SendCodeSuccessState) {
                       toast(message: state.email, state: ToastStates.success);
+                      navigateReplacement(
+                          context: context, route: Routes.createNewPass);
                     }
                     if (state is SendCodeErrorState) {
                       toast(message: state.message, state: ToastStates.error);

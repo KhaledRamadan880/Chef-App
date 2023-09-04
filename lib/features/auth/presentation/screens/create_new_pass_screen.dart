@@ -1,12 +1,18 @@
 import 'package:chef_app/core/database/local/app_locale.dart';
 import 'package:chef_app/core/routes/routes.dart';
+import 'package:chef_app/core/util/color.dart';
+import 'package:chef_app/core/util/commons.dart';
 import 'package:chef_app/core/util/widgets/custom_app_bar.dart';
+import 'package:chef_app/core/util/widgets/custom_loading_indicator.dart';
 import 'package:chef_app/core/util/widgets/custom_text_field.dart';
 import 'package:chef_app/core/util/widgets/primary_button.dart';
 import 'package:chef_app/core/util/images.dart';
 import 'package:chef_app/core/util/strings.dart';
 import 'package:chef_app/core/util/theme/theme.dart';
+import 'package:chef_app/features/auth/presentation/cubits/forget_pass_cubit/forget_pass_cubit.dart';
+import 'package:chef_app/features/auth/presentation/cubits/forget_pass_cubit/forget_pass_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CreateNewPassScreen extends StatelessWidget {
@@ -15,7 +21,11 @@ class CreateNewPassScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(title: AppStrings.createYourNewPassword.tr(context)),
+      appBar: customAppBar(
+        title: AppStrings.createYourNewPassword.tr(context),
+        context: context,
+        route: Routes.sendCode,
+      ),
       body: SingleChildScrollView(
         child: Center(
           child: Padding(
@@ -25,34 +35,128 @@ class CreateNewPassScreen extends StatelessWidget {
                 //! Lock Image
                 Image.asset(
                   AppImages.lock,
-                  height: 300.h,
+                  height: 250.h,
                 ),
                 SizedBox(height: 26.h),
                 //! Title
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    AppStrings.createYourNewPassword.tr(context),
-                    style: appTheme().textTheme.bodySmall!.copyWith(
-                          fontSize: 16,
-                        ),
-                  ),
+                Text(
+                  AppStrings.createYourNewPassword.tr(context),
+                  style: appTheme()
+                      .textTheme
+                      .bodySmall!
+                      .copyWith(fontSize: 16, color: AppColors.black),
                 ),
                 SizedBox(height: 24.h),
-                //! New Password TextField
-                // CustomTextField(hint: AppStrings.newPassword.tr(context)),
-                // SizedBox(height: 30.h),
-                // //! Confirm Password TextField
-                // CustomTextField(hint: AppStrings.confirmPassword.tr(context)),
-                // SizedBox(height: 30.h),
-                // //! Code TextField
-                // const CustomTextField(hint: AppStrings.code),
-                SizedBox(height: 30.h),
-                //! Reset Button
-                // PrimaryButton(
-                //   title: AppStrings.sendResetLink.tr(context),
-                //   route: Routes.login,
-                // ),
+                //! Form
+                BlocConsumer<ForgetPassCubit, ForgetPassState>(
+                  listener: (context, state) {
+                    if (state is changePassSuccess) {
+                      toast(message: state.message, state: ToastStates.success);
+                      navigateReplacement(
+                          context: context, route: Routes.login);
+                    }
+                    if (state is changePassError) {
+                      toast(message: state.message, state: ToastStates.error);
+                    }
+                  },
+                  builder: (context, state) {
+                    return Form(
+                      key: BlocProvider.of<ForgetPassCubit>(context)
+                          .resetPAssKey,
+                      child: Column(
+                        children: [
+                          //! New Password TextField
+                          CustomTextField(
+                            controller:
+                                BlocProvider.of<ForgetPassCubit>(context)
+                                    .newPassController,
+                            hint: AppStrings.newPassword.tr(context),
+                            obscure: BlocProvider.of<ForgetPassCubit>(context)
+                                .newPassObscured,
+                            suffixIcon:
+                                BlocProvider.of<ForgetPassCubit>(context)
+                                    .newPassSuffixIcon(),
+                            validator: (value) {
+                              if (value!.isEmpty || value.length <= 6) {
+                                return AppStrings.pleaseEnterValidPassword
+                                    .tr(context);
+                              }
+                              return null;
+                            },
+                            suffixShow: true,
+                            // suffixIcon: suffixIcon,
+                          ),
+                          SizedBox(height: 30.h),
+                          // //! Confirm Password TextField
+                          CustomTextField(
+                            controller:
+                                BlocProvider.of<ForgetPassCubit>(context)
+                                    .confirmPassController,
+                            hint: AppStrings.confirmPassword.tr(context),
+                            obscure: BlocProvider.of<ForgetPassCubit>(context)
+                                .confirmPassObscured,
+                            suffixIcon:
+                                BlocProvider.of<ForgetPassCubit>(context)
+                                    .confirmPassSuffixIcon(),
+                            validator: (value) {
+                              if (value!.isEmpty || value.length <= 6) {
+                                return AppStrings.pleaseEnterValidPassword
+                                    .tr(context);
+                              }
+                              if (value !=
+                                  BlocProvider.of<ForgetPassCubit>(context)
+                                      .newPassController
+                                      .text) {
+                                return AppStrings.pleaseEnterValidPassword
+                                    .tr(context);
+                              }
+                              return null;
+                            },
+
+                            suffixShow: true,
+                            // suffixIcon: suffixIcon,
+                          ),
+                          SizedBox(height: 30.h),
+                          // //! Code TextField
+                          CustomTextField(
+                            controller:
+                                BlocProvider.of<ForgetPassCubit>(context)
+                                    .codeController,
+                            hint: AppStrings.code.tr(context),
+                            validator: (value) {
+                              if (num.tryParse(value!) == null) {
+                                return AppStrings.pleaseEnterValidCode
+                                    .tr(context);
+                              }
+                              if (value.isEmpty) {
+                                return AppStrings.pleaseEnterValidCode
+                                    .tr(context);
+                              }
+                              return null;
+                            },
+                          ),
+                          SizedBox(height: 30.h),
+                          //! Reset Button
+                          state is changePassLoading
+                              ? const CustomLoadingIndicator()
+                              : PrimaryButton(
+                                  title: AppStrings.changePassword.tr(context),
+                                  onPressed: () {
+                                    if (BlocProvider.of<ForgetPassCubit>(
+                                            context)
+                                        .resetPAssKey
+                                        .currentState!
+                                        .validate()) {
+                                      BlocProvider.of<ForgetPassCubit>(context)
+                                          .resetPass();
+                                    }
+                                  },
+                                ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
               ],
             ),
           ),

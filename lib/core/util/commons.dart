@@ -2,12 +2,19 @@ import 'package:chef_app/core/util/color.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-void navigate({
+void navigateNamed({
   required BuildContext context,
   required String route,
   dynamic arg,
 }) {
   Navigator.pushNamed(context, route);
+}
+void navigateReplacement({
+  required BuildContext context,
+  required String route,
+  dynamic arg,
+}) {
+  Navigator.pushReplacementNamed(context, route);
 }
 
 void toast({required String message, required ToastStates state}) {

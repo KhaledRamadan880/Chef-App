@@ -37,9 +37,31 @@ class AuthRepository {
       return Right(response.data[ApiKeys.message]);
     } on ServerExceptions catch (e) {
       return Left(e.errorModel.errorMessage);
+    } catch (e) {
+      return Left(e.toString());
     }
-    // catch (e) {
-    //   return Left(e.toString());
-    // }
+  }
+
+  //! Reset Forget Password
+  Future<Either<String, String>> resetPass({
+    required String email,
+    required String newPAss,
+    required String confirmPassword,
+    required String code,
+  }) async {
+    try {
+      final response =
+          await sl<ApiConsumer>().patch(EndPoints.forgetPassChange, data: {
+        ApiKeys.email: email,
+        ApiKeys.newPass: newPAss,
+        ApiKeys.confirmPassword: confirmPassword,
+        ApiKeys.code: code,
+      });
+      return Right(response.data[ApiKeys.message]);
+    } on ServerExceptions catch (e) {
+      return Left(e.errorModel.errorMessage);
+    } catch (e) {
+      return Left(e.toString());
+    }
   }
 }
