@@ -2,6 +2,7 @@ import 'package:chef_app/core/bloc/cubit/global_cubit.dart';
 import 'package:chef_app/core/bloc/cubit/global_state.dart';
 import 'package:chef_app/core/database/local/app_locale.dart';
 import 'package:chef_app/core/routes/routes.dart';
+import 'package:chef_app/core/util/commons.dart';
 import 'package:chef_app/core/util/widgets/custom_loading_indicator.dart';
 import 'package:chef_app/core/util/widgets/custom_text_field.dart';
 import 'package:chef_app/core/util/widgets/primary_button.dart';
@@ -47,7 +48,15 @@ class LoginScreen extends StatelessWidget {
             ),
             const SizedBox(height: 80),
             //! Form
-            BlocBuilder<LoginCubit, LoginState>(
+            BlocConsumer<LoginCubit, LoginState>(
+              listener: (context, state) {
+                if (state is LoginSuccessState) {
+                  toast(message: AppStrings.loginSucessfully, state: ToastStates.success);
+                }
+                if (state is LoginErrorState) {
+                  toast(message: state.message, state: ToastStates.error);
+                }
+              },
               builder: (context, state) {
                 return Form(
                   key: BlocProvider.of<LoginCubit>(context).loginKey,
