@@ -1,4 +1,7 @@
+import 'package:chef_app/core/database/api/end_points.dart';
+import 'package:chef_app/core/database/cache/cache.dart';
 import 'package:chef_app/core/database/local/app_locale.dart';
+import 'package:chef_app/core/services/service_locator.dart';
 import 'package:chef_app/core/util/commons.dart';
 import 'package:chef_app/core/util/theme/theme.dart';
 import 'package:chef_app/core/util/color.dart';
@@ -6,7 +9,6 @@ import 'package:chef_app/core/util/images.dart';
 import 'package:chef_app/core/util/strings.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/routes/routes.dart';
-
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -16,15 +18,16 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
-  //! Navigate Method 
+  //! Navigate Method
   @override
   void initState() {
     super.initState();
     Future.delayed(
       const Duration(seconds: 3),
-      () {        
-        navigateReplacement(context: context, route: Routes.changeLang);
+      () async {
+        sl<Cache>().getStringData(ApiKeys.token) == null
+            ? navigateReplacement(context: context, route: Routes.changeLang)
+            : navigateReplacement(context: context, route: Routes.home);
       },
     );
   }
