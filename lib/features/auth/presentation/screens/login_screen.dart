@@ -53,6 +53,7 @@ class LoginScreen extends StatelessWidget {
                   toast(
                       message: AppStrings.loginSucessfully,
                       state: ToastStates.success);
+                  navigateReplacement(context: context, route: Routes.home);
                 }
                 if (state is LoginErrorState) {
                   toast(message: state.message, state: ToastStates.error);
@@ -123,7 +124,7 @@ class LoginScreen extends StatelessWidget {
                         state is LoginLoadingState
                             ? const CustomLoadingIndicator()
                             : PrimaryButton(
-                                title: AppStrings.signIn.tr(context),                                
+                                title: AppStrings.signIn.tr(context),
                                 onPressed: () {
                                   if (BlocProvider.of<LoginCubit>(context)
                                       .loginKey
@@ -131,7 +132,6 @@ class LoginScreen extends StatelessWidget {
                                       .validate()) {
                                     BlocProvider.of<LoginCubit>(context)
                                         .login();
-                                    // navigate(context: context, route: '/menu');
                                   }
                                 },
                               ),
