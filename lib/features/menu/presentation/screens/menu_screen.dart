@@ -1,11 +1,8 @@
 import 'package:chef_app/core/database/local/app_locale.dart';
-import 'package:chef_app/core/util/color.dart';
 import 'package:chef_app/core/util/strings.dart';
-import 'package:chef_app/core/util/theme/theme.dart';
 import 'package:chef_app/core/util/widgets/primary_button.dart';
 import 'package:chef_app/features/menu/presentation/components/meal_item_component.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MenuScreen extends StatelessWidget {
   const MenuScreen({super.key});
@@ -29,7 +26,10 @@ class MenuScreen extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return const Column(
                     children: [
-                      CustomMealItem(),
+                      CustomMealItem(
+                        imageUrl:
+                            'https://hips.hearstapps.com/hmg-prod/images/healthy-chicken-recipes-1641586837.jpeg?crop=1.00xw:0.995xh;0,0&resize=640:*',
+                      ),
                     ],
                   );
                 },
@@ -41,4 +41,3 @@ class MenuScreen extends StatelessWidget {
     );
   }
 }
-
