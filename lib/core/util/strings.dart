@@ -50,6 +50,8 @@ class AppStrings {
   static const String mealQuantity = 'mealQuantity';
   static const String upladPhoto = 'upladPhoto';
   static const String addToMenu = 'addToMenu';
+  static const String confirm = 'confirm';
+  static const String mealDelete = 'mealDelete';
   static const String mealAddedSucessfully = 'mealAddedSucessfully';
   static const String mealDeletedSucessfully = 'mealDeletedSucessfully';
   static const String mealUpdatedSucessfully = 'mealUpdatedSucessfully';

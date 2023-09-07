@@ -1,6 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:chef_app/core/database/local/app_locale.dart';
 import 'package:chef_app/core/util/color.dart';
+import 'package:chef_app/core/util/strings.dart';
 import 'package:chef_app/core/util/theme/theme.dart';
+import 'package:chef_app/core/util/widgets/custom_alert_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
@@ -13,16 +16,16 @@ class CustomMealItem extends StatelessWidget {
   final String imageUrl;
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: 327.w,
-      height: 150.h,
-      padding: const EdgeInsets.all(24),
+      height: 120.h,
+      // padding: const EdgeInsets.symmetric(horizontal: 15),
       child: Row(
         children: [
           //! Image
           SizedBox(
-            width: 60.w,
-            height: 60.h,
+            width: 80.w,
+            height: 80.h,
             child: CachedNetworkImage(
               imageUrl: imageUrl,
               placeholder: (context, url) => Shimmer.fromColors(
@@ -69,7 +72,16 @@ class CustomMealItem extends StatelessWidget {
           const Spacer(),
           //! Cancel Icon Button
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              showDialog(
+                  context: context,
+                  builder: ((context) {
+                    return CustomAlertDialog(
+                      message: AppStrings.mealDelete.tr(context),
+                      confirmAction: () {},
+                    );
+                  }));
+            },
             icon: const Icon(
               Icons.cancel,
               color: AppColors.red,

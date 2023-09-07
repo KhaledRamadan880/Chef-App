@@ -65,5 +65,6 @@
     "passwordChangedSucessfully": "تم تغير كلمة السر",
     "pleaseEnterValidNumber": "من فضلك أدخل رقم صحيح",
     "camera": "الكامير",
-    "gallery": "المعرض"
+    "gallery": "المعرض",
+    "mealDelete": "حذف الوجبة"
 }

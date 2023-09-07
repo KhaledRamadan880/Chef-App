@@ -65,5 +65,6 @@
     "passwordChangedSucessfully": "Password Changed Sucessfully",
     "pleaseEnterValidNumber": "Please Enter Valid Number",
     "camera": "Camera",
-    "gallery": "Gallery"
+    "gallery": "Gallery",
+    "mealDelete": "Delete Meal"
 }

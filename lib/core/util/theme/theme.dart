@@ -36,6 +36,8 @@ ThemeData appTheme() {
         fontWeight: FontWeight.w700,
         color: AppColors.darkGrey,
       ),
+       
     ),
+    
   );
 }
