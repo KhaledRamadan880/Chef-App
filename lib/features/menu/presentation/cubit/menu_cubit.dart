@@ -26,4 +26,10 @@ class MenuCubit extends Cubit<MenuState> {
     selectedItem = item;
     emit(ChangeItemState());
   }
+
+  String groupval = 'quantity';
+  void changeGroupVal(value) {
+    groupval = value;
+    emit(ChangeGroupValState());
+  }
 }

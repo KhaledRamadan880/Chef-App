@@ -33,8 +33,8 @@ class AddMealScreen extends StatelessWidget {
               children: [
                 //! Image
                 SizedBox(
-                  height: 170.h,
-                  width: 170.w,
+                  height: 150.h,
+                  width: 150.w,
                   child: Stack(
                     children: [
                       Align(
@@ -65,14 +65,14 @@ class AddMealScreen extends StatelessWidget {
                           },
                           color: AppColors.primary,
                           minWidth: 10,
-                          height: 40,
+                          height: 35,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: const Icon(
                             Icons.edit,
                             color: AppColors.white,
-                            size: 20,
+                            size: 15,
                           ),
                         ),
                       ),
@@ -95,6 +95,7 @@ class AddMealScreen extends StatelessWidget {
                                   .mealNameController,
                             ),
                             const SizedBox(height: 24),
+
                             //! Price TextField
                             CustomTextField(
                               hint: AppStrings.price.tr(context),
@@ -102,6 +103,7 @@ class AddMealScreen extends StatelessWidget {
                                   .mealPriceController,
                             ),
                             const SizedBox(height: 24),
+
                             //! Category Drop Down Button
                             Container(
                               width: double.maxFinite,
@@ -142,7 +144,6 @@ class AddMealScreen extends StatelessWidget {
                                 },
                               ),
                             ),
-
                             const SizedBox(height: 24),
 
                             //! Description TextField
@@ -151,7 +152,64 @@ class AddMealScreen extends StatelessWidget {
                               controller: BlocProvider.of<MenuCubit>(context)
                                   .mealDescController,
                             ),
-                            const SizedBox(height: 24),
+                            const SizedBox(height: 14),
+
+                            //! Radio
+                            Row(
+                              children: [
+                                //! Quantity
+                                Row(
+                                  children: [
+                                    Radio(
+                                      activeColor: AppColors.primary,
+                                      value: 'quantity',
+                                      groupValue:
+                                          BlocProvider.of<MenuCubit>(context)
+                                              .groupval,
+                                      onChanged: (value) {
+                                        BlocProvider.of<MenuCubit>(context)
+                                            .changeGroupVal(value);
+                                      },
+                                    ),
+                                    Text(
+                                      AppStrings.mealQuantity.tr(context),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleMedium!
+                                          .copyWith(
+                                            color: AppColors.darkGrey,
+                                          ),
+                                    ),
+                                  ],
+                                ),
+                                const Spacer(),
+                                //! Number
+                                Row(
+                                  children: [
+                                    Radio(
+                                      activeColor: AppColors.primary,
+                                      value: 'number',
+                                      groupValue:
+                                          BlocProvider.of<MenuCubit>(context)
+                                              .groupval,
+                                      onChanged: (value) {
+                                        BlocProvider.of<MenuCubit>(context)
+                                            .changeGroupVal(value);
+                                      },
+                                    ),
+                                    Text(
+                                      AppStrings.mealNumber.tr(context),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleMedium!
+                                          .copyWith(
+                                            color: AppColors.darkGrey,
+                                          ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
 
                             //! Add Meal Button
                             PrimaryButton(
