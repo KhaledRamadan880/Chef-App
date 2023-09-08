@@ -5,8 +5,12 @@ import 'package:chef_app/core/util/images.dart';
 import 'package:chef_app/core/util/strings.dart';
 import 'package:chef_app/core/util/widgets/custom_app_bar.dart';
 import 'package:chef_app/core/util/widgets/custom_text_field.dart';
+import 'package:chef_app/core/util/widgets/primary_button.dart';
 import 'package:chef_app/features/menu/presentation/components/photo_select_dialog.dart';
+import 'package:chef_app/features/menu/presentation/cubit/menu_cubit.dart';
+import 'package:chef_app/features/menu/presentation/cubit/menu_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -76,31 +80,90 @@ class AddMealScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 24),
-                //! Name TextField
-                CustomTextField(
-                  hint: AppStrings.name.tr(context),
-                  controller: TextEditingController(),
+                BlocConsumer<MenuCubit, MenuState>(
+                  listener: (context, state) {},
+                  builder: (context, state) {
+                    return Form(
+                      key: BlocProvider.of<MenuCubit>(context).addMealKey,
+                      child: Form(
+                        child: Column(
+                          children: [
+                            //! Name TextField
+                            CustomTextField(
+                              hint: AppStrings.name.tr(context),
+                              controller: BlocProvider.of<MenuCubit>(context)
+                                  .mealNameController,
+                            ),
+                            const SizedBox(height: 24),
+                            //! Price TextField
+                            CustomTextField(
+                              hint: AppStrings.price.tr(context),
+                              controller: BlocProvider.of<MenuCubit>(context)
+                                  .mealPriceController,
+                            ),
+                            const SizedBox(height: 24),
+                            //! Category Drop Down Button
+                            Container(
+                              width: double.maxFinite,
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 15),
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: AppColors.grey,
+                                ),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: DropdownButton(
+                                underline: Container(),
+                                isExpanded: true,
+                                hint: Text(
+                                  BlocProvider.of<MenuCubit>(context)
+                                      .selectedItem,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall!
+                                      .copyWith(
+                                        color: AppColors.grey,
+                                        fontSize: 16,
+                                      ),
+                                ),
+                                items: BlocProvider.of<MenuCubit>(context)
+                                    .categoryList
+                                    .map(
+                                      (e) => DropdownMenuItem(
+                                        value: e,
+                                        child: Text(e),
+                                      ),
+                                    )
+                                    .toList(),
+                                onChanged: (value) {
+                                  BlocProvider.of<MenuCubit>(context)
+                                      .changeItem(value);
+                                },
+                              ),
+                            ),
+
+                            const SizedBox(height: 24),
+
+                            //! Description TextField
+                            CustomTextField(
+                              hint: AppStrings.description.tr(context),
+                              controller: BlocProvider.of<MenuCubit>(context)
+                                  .mealDescController,
+                            ),
+                            const SizedBox(height: 24),
+
+                            //! Add Meal Button
+                            PrimaryButton(
+                              title: AppStrings.addMeal.tr(context),
+                              onPressed: () {},
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
                 ),
-                const SizedBox(height: 24),
-                //! Price TextField
-                CustomTextField(
-                  hint: AppStrings.price.tr(context),
-                  controller: TextEditingController(),
-                ),
-                const SizedBox(height: 24),
-                //! Category TextField
-                CustomTextField(
-                  hint: AppStrings.category.tr(context),
-                  controller: TextEditingController(),
-                  // suffixIcon: IconButton,
-                ),
-                const SizedBox(height: 24),
-                //! Description TextField
-                CustomTextField(
-                  hint: AppStrings.description.tr(context),
-                  controller: TextEditingController(),
-                ),
-                const SizedBox(height: 24),
               ],
             ),
           ),
