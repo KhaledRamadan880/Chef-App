@@ -24,6 +24,7 @@ class AppStrings {
   static const String sendResetLinkInfo = 'sendResetLinkInfo';
   static const String code = 'code';
   static const String createYourNewPassword = 'createYourNewPassword';
+  static const String writeDescription = 'writeDescription';
   static const String description = 'description';
   static const String loginSucessfully = 'loginSucessfully';
   static const String loginFailed = 'loginFailed';
@@ -43,14 +44,17 @@ class AppStrings {
 
   //! home-order-menu
   static const String addDishToMenu = 'addDishToMenu';
+  static const String addMeal = 'addMeal';
   static const String mealName = 'mealName';
   static const String mealDesc = 'mealDesc';
   static const String mealPrice = 'mealPrice';
+  static const String price = 'price';
   static const String mealNumber = 'mealNumber';
   static const String mealQuantity = 'mealQuantity';
   static const String upladPhoto = 'upladPhoto';
   static const String addToMenu = 'addToMenu';
   static const String confirm = 'confirm';
+  static const String category = 'category';
   static const String mealDelete = 'mealDelete';
   static const String mealAddedSucessfully = 'mealAddedSucessfully';
   static const String mealDeletedSucessfully = 'mealDeletedSucessfully';

@@ -1,6 +1,7 @@
 import 'package:chef_app/core/util/color.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:image_picker/image_picker.dart';
 
 void navigateNamed({
   required BuildContext context,
@@ -9,6 +10,7 @@ void navigateNamed({
 }) {
   Navigator.pushNamed(context, route);
 }
+
 void navigateReplacement({
   required BuildContext context,
   required String route,
@@ -39,5 +41,14 @@ Color getState(ToastStates state) {
       return AppColors.green;
     case ToastStates.warning:
       return AppColors.primary;
+  }
+}
+
+Future<XFile?> imagePicker(ImageSource source) async {
+  final XFile? image = await ImagePicker().pickImage(source: source);
+  if (image != null) {
+    return image;
+  } else {
+    return null;
   }
 }

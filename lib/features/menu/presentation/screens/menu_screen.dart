@@ -1,4 +1,5 @@
 import 'package:chef_app/core/database/local/app_locale.dart';
+import 'package:chef_app/core/util/commons.dart';
 import 'package:chef_app/core/util/strings.dart';
 import 'package:chef_app/core/util/widgets/primary_button.dart';
 import 'package:chef_app/features/menu/presentation/components/meal_item_component.dart';
@@ -17,7 +18,9 @@ class MenuScreen extends StatelessWidget {
             //! Add Meal Button
             PrimaryButton(
               title: AppStrings.addDishToMenu.tr(context),
-              onPressed: () {},
+              onPressed: () {
+                navigateNamed(context: context, route: '/addMeal');
+              },
             ),
             //! Meals
             Expanded(

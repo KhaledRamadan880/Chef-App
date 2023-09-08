@@ -21,7 +21,8 @@
     "oldPassword": "كلمة المرور القديمة",
     "code": "الكود",
     "sendCode": "إرسال الكود",
-    "description": "اكتب بعض الوصف",
+    "writeDescription": "اكتب بعض الوصف",    
+    "description": "الوصف",
     "profile": "الملف الشخصي",
     "confirm": "تأكيد",
     "editProfile": "تعديل الملف الشخصي",
@@ -66,5 +67,8 @@
     "pleaseEnterValidNumber": "من فضلك أدخل رقم صحيح",
     "camera": "الكامير",
     "gallery": "المعرض",
-    "mealDelete": "حذف الوجبة"
+    "mealDelete": "حذف الوجبة",
+    "addMeal": "اضافة وجبة",
+    "category": "النوع",
+    "price": "السعر"
 }

@@ -4,6 +4,7 @@ import 'package:chef_app/features/auth/presentation/screens/login_screen.dart';
 import 'package:chef_app/features/auth/presentation/screens/send_code_screen.dart';
 import 'package:chef_app/features/auth/presentation/screens/splash_screen.dart';
 import 'package:chef_app/features/home/screens/home_screen.dart';
+import 'package:chef_app/features/menu/presentation/screens/add_meal_screen.dart';
 import 'package:chef_app/features/menu/presentation/screens/menu_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +16,7 @@ class Routes {
   static const String createNewPass = '/createNewPass';
   static const String home = '/home';
   static const String menu = '/menu';
+  static const String addMeal = '/addMeal';
 }
 
 class AppRoutes {
@@ -32,6 +34,8 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => const CreateNewPassScreen());
       case Routes.menu:
         return MaterialPageRoute(builder: (_) => const MenuScreen());
+      case Routes.addMeal:
+        return MaterialPageRoute(builder: (_) => const AddMealScreen());
       case Routes.home:
         return MaterialPageRoute(builder: (_) => const HomeScreen());
     }

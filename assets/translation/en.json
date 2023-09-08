@@ -23,7 +23,8 @@
     "oldPassword": "Old Password",
     "code": "Code",
     "sendCode": "Send Code",
-    "description": "Write some Description",
+    "writeDescription": "Write some Description",
+    "description": "Description",
     "profile": "Profile",
     "confirm": "Confirm",
     "please_enter_email": "Please Enter valid E-mail",
@@ -66,5 +67,9 @@
     "pleaseEnterValidNumber": "Please Enter Valid Number",
     "camera": "Camera",
     "gallery": "Gallery",
-    "mealDelete": "Delete Meal"
+    "mealDelete": "Delete Meal",
+    "addMeal": "Add Meal",
+    "category": "Category",
+    "price": "Price"
+
 }
