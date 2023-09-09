@@ -32,5 +32,24 @@ final class UpdateProfileErrorState extends ProfileState {
 
   UpdateProfileErrorState(this.message);
 }
+
 final class UpdateProfileLoadingState extends ProfileState {}
+
+final class TakePhotoSuccessState extends ProfileState {}
+
+final class ChangeLangSuccessState extends ProfileState {}
+
+final class LogoutSuccessState extends ProfileState {
+  final String message;
+
+  LogoutSuccessState(this.message);
+}
+
+final class LogoutErrorState extends ProfileState {
+  final String message;
+
+  LogoutErrorState(this.message);
+}
+
+final class LogoutLoadingState extends ProfileState {}
 

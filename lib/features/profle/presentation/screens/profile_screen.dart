@@ -2,12 +2,13 @@ import 'package:chef_app/core/database/local/app_locale.dart';
 import 'package:chef_app/core/routes/routes.dart';
 import 'package:chef_app/core/util/color.dart';
 import 'package:chef_app/core/util/commons.dart';
-import 'package:chef_app/core/util/images.dart';
 import 'package:chef_app/core/util/strings.dart';
-import 'package:chef_app/features/menu/presentation/components/photo_select_dialog.dart';
+import 'package:chef_app/features/profle/presentation/components/profile_pic.dart';
+import 'package:chef_app/features/profle/presentation/cubit/profile_cubit.dart';
+import 'package:chef_app/features/profle/presentation/cubit/profile_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:image_picker/image_picker.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -23,69 +24,12 @@ class ProfileScreen extends StatelessWidget {
             ),
 
             //! Image
-            Container(
-              // height: 150.h,
-              width: 150.w,
-              padding: const EdgeInsets.all(1),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(70),
-                border: Border.all(
-                  width: 2,
-                  color: AppColors.primary,
-                ),
-              ),
-              child: Stack(
-                children: [
-                  const Align(
-                    alignment: Alignment.center,
-                    child: CircleAvatar(
-                      radius: 70,
-                      backgroundImage: AssetImage(AppImages.user),
-                    ),
-                  ),
-                  Positioned.directional(
-                    textDirection: Directionality.of(context),
-                    bottom: 0,
-                    end: 0,
-                    child: MaterialButton(
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return PhotoSelectedDialog(
-                              cameraOnTap: () {
-                                Navigator.pop(context);
-                                imagePicker(ImageSource.camera);
-                              },
-                              galleryOnTap: () {
-                                Navigator.pop(context);
-                                imagePicker(ImageSource.gallery);
-                              },
-                            );
-                          },
-                        );
-                      },
-                      color: AppColors.primary,
-                      minWidth: 10,
-                      height: 35,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: const Icon(
-                        Icons.edit,
-                        color: AppColors.white,
-                        size: 15,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            const CustomProfilePic(),
             SizedBox(height: 14.h),
 
             //! Name
             Text(
-              'Full Name',
+              'Khaled Ramadan',
               style: Theme.of(context).textTheme.titleLarge!.copyWith(
                     color: AppColors.black,
                   ),
@@ -111,7 +55,7 @@ class ProfileScreen extends StatelessWidget {
                     icon: Icons.person_outline_outlined,
                     title: AppStrings.editProfile,
                     onTap: () {
-                      navigateReplacement(
+                      navigateNamed(
                           context: context, route: Routes.editProfile);
                     },
                   ),
@@ -119,20 +63,40 @@ class ProfileScreen extends StatelessWidget {
                     icon: Icons.visibility_off_outlined,
                     title: AppStrings.password,
                     onTap: () {
-                      navigateReplacement(
+                      navigateNamed(
                           context: context, route: Routes.changePassword);
                     },
                   ),
                   ProfileListTile(
                     icon: Icons.settings,
                     title: AppStrings.settings,
-                    onTap: () {},
+                    onTap: () {
+                      navigateNamed(context: context, route: Routes.setting);
+                    },
                   ),
-                  ProfileListTile(
-                    icon: Icons.logout,
-                    title: AppStrings.logout,
-                    iconColor: AppColors.primary,
-                    onTap: () {},
+                  BlocConsumer<ProfileCubit, ProfileState>(
+                    listener: (context, state) {
+                      if (state is LogoutSuccessState) {
+                        toast(
+                            message: state.message, state: ToastStates.success);
+                        navigateReplacement(
+                            context: context, route: Routes.login);
+                      }
+                      if (state is LogoutErrorState) {
+                        toast(
+                            message: state.message, state: ToastStates.error);                                                    
+                      }
+                    },
+                    builder: (context, state) {
+                      return ProfileListTile(
+                        icon: Icons.logout,
+                        title: AppStrings.logout,
+                        iconColor: AppColors.primary,
+                        onTap: () {
+                          BlocProvider.of<ProfileCubit>(context).logout();
+                        },
+                      );
+                    },
                   ),
                 ],
               ),

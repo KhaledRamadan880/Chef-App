@@ -3,22 +3,50 @@ import 'package:chef_app/features/profle/data/repository/profile_repo.dart';
 import 'package:chef_app/features/profle/presentation/cubit/profile_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {
   ProfileCubit(this.profileRepo) : super(ProfileInitial());
 
-  TextEditingController oldPasscontroller = TextEditingController();
-  TextEditingController newPasscontroller = TextEditingController();
-  TextEditingController confirmcontroller = TextEditingController();
-
-  GlobalKey<FormState> changePassKey = GlobalKey<FormState>();
-
   final ProfileRepo profileRepo;
 
-  //! Update Profile
+  //! Take Photo Method
+  void takePhoto(value) {
+    image = value;
+    emit(TakePhotoSuccessState());
+  }
+
+  //! Logout
+  void logout() async {
+    emit(LogoutLoadingState());
+    final response = await profileRepo.logout();
+    response.fold(
+      (l) => emit(LogoutErrorState(l)),
+      (r) => emit(LogoutSuccessState(r)),
+    );
+  }
+
+  //! Edit Profile
+  TextEditingController nameController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController locationController = TextEditingController();
+  TextEditingController brandNameController = TextEditingController();
+  TextEditingController minChargeController = TextEditingController();
+  TextEditingController discChargeController = TextEditingController();
+  GlobalKey<FormState> editProfileKey = GlobalKey<FormState>();
+  XFile? image;
+  //* Method
   void updateProfile() async {
     emit(UpdateProfileLoadingState());
-    final res = await profileRepo.updataProfile();
+    final res = await profileRepo.updataProfile(
+      name: nameController.text,
+      phone: phoneController.text,
+      location: locationController.text,
+      brandName: brandNameController.text,
+      minCharge: minChargeController.text,
+      disc: discChargeController.text,
+      profilePic: image!,
+    );
     res.fold(
       (l) => emit(UpdateProfileErrorState(l)),
       (r) => emit(UpdateProfileSuccessState(r)),
@@ -26,6 +54,11 @@ class ProfileCubit extends Cubit<ProfileState> {
   }
 
   //! Change Password
+  TextEditingController oldPasscontroller = TextEditingController();
+  TextEditingController newPasscontroller = TextEditingController();
+  TextEditingController confirmcontroller = TextEditingController();
+  GlobalKey<FormState> changePassKey = GlobalKey<FormState>();
+  //* Method
   void changePass() async {
     emit(ChangePassLoadingState());
     final response = await profileRepo.changePassword(
@@ -39,7 +72,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     );
   }
 
-  //* New Passs
+  //* New Passs Suffix Icon
   bool newPassIsVisible = false;
   bool newPassObscured = true;
   IconButton newPassSuffixIcon() {
@@ -55,8 +88,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     );
   }
 
-  //* Confirm Passs
-
+  //* Confirm Passs Suffix Icon
   bool confirmPassIsVisible = false;
   bool confirmPassObscured = true;
   IconButton confirmPassSuffixIcon() {
@@ -72,7 +104,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     );
   }
 
-  //* Old Password
+  //* Old Password Suffix Icon
   TextEditingController codeController = TextEditingController();
   bool oldPassIsVisible = false;
   bool oldPassObscured = true;
@@ -88,19 +120,4 @@ class ProfileCubit extends Cubit<ProfileState> {
           : const Icon(Icons.visibility_off, color: AppColors.primary),
     );
   }
-
-  // //* Reset Password Method
-  // void resetPass() async {
-  //   emit(changePassLoading());
-  //   final res = await authRepository.resetPass(
-  //     email: emailController.text,
-  //     newPAss: newPassController.text,
-  //     confirmPassword: confirmPassController.text,
-  //     code: codeController.text,
-  //   );
-  //   res.fold(
-  //     (l) => emit(changePassError(l)),
-  //     (r) => emit(changePassSuccess(r)),
-  //   );
-  // }
 }
