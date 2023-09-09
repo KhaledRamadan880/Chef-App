@@ -19,14 +19,19 @@ class Cache {
     }
   }
 
-  String? getStringData(String key){
-    return  sharedPreferences.getString(key);
-  }
-  bool? getBoolData(String key){
-    return  sharedPreferences.getBool(key);
-  }
-  int? getIntData(String key){
-    return  sharedPreferences.getInt(key);
+  String? getStringData(String key) {
+    return sharedPreferences.getString(key);
   }
 
+  bool? getBoolData(String key) {
+    return sharedPreferences.getBool(key);
+  }
+
+  int? getIntData(String key) {
+    return sharedPreferences.getInt(key);
+  }
+
+  Future clear() async{
+    return await sharedPreferences.clear();
+  }
 }
