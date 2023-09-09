@@ -1,4 +1,5 @@
 import 'package:chef_app/core/util/color.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
@@ -51,4 +52,11 @@ Future<XFile?> imagePicker(ImageSource source) async {
   } else {
     return null;
   }
+}
+
+Future uploadImagetoApi(XFile image) async {
+  return MultipartFile.fromFileSync(
+    image.path,
+    filename: image.path.split('/').last,
+  );
 }

@@ -9,7 +9,7 @@ class EndPoints {
   static const addMeal = 'meal/add-to-menu';
   static const updateMeal = 'chef/update-meal/';
   static const deleteMEal = 'meal/delete-meal/';
-  static const getAllMeal = 'meal/get-meals';
+  static const getMeal = 'meal/get-meals';
   static const logout = 'chef/logout';
 
   static String chefGetEndPoint(id) {
@@ -21,7 +21,10 @@ class EndPoints {
   }
 
   static String deleteMealEndPoint(id) {
-    return '$updateMeal$id';
+    return '$deleteMEal$id';
+  }
+  static String getAllChefMeals(id) {
+    return '/chef/get-chef/$id/meals';
   }
 }
 
@@ -33,5 +36,12 @@ class ApiKeys {
   static String confirmPassword = "confirmPassword";
   static String code = "code";
   static String message = 'message';
+  static String name = 'name';
   static String token = 'token';
+  static String description = 'description';
+  static String price = 'price';
+  static String category = 'category';
+  static String mealImages = 'mealImages';
+  static String howToSell = 'howToSell';
+  static String id = 'id';
 }
