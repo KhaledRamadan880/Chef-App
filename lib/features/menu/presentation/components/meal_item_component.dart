@@ -48,33 +48,38 @@ class CustomMealItem extends StatelessWidget {
           ),
           SizedBox(width: 16.w),
           //! column text
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                mealModel.name,
-                style: appTheme().textTheme.labelMedium!.copyWith(
-                      color: AppColors.black,
-                    ),
-              ),
-              Text(
-                mealModel.description,
-                style: appTheme().textTheme.labelMedium!.copyWith(
-                      color: AppColors.grey,
-                    ),
-              ),
-              Text(
-                mealModel.price.toString(),
-                style: appTheme().textTheme.labelMedium!.copyWith(
-                      color: AppColors.grey,
-                    ),
-              ),
-            ],
+          SizedBox(
+            width: 170.w,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  mealModel.name,
+                  style: appTheme().textTheme.labelMedium!.copyWith(
+                        color: AppColors.black,
+                        fontWeight: FontWeight.w100,
+                      ),
+                ),
+                Text(
+                  mealModel.description,
+                  overflow: TextOverflow.ellipsis,
+                  style: appTheme().textTheme.labelMedium!.copyWith(
+                        color: AppColors.grey,
+                      ),
+                ),
+                Text(
+                  mealModel.price.toString() + AppStrings.le.tr(context),
+                  style: appTheme().textTheme.labelMedium!.copyWith(
+                        color: AppColors.grey,
+                      ),
+                ),
+              ],
+            ),
           ),
           const Spacer(),
           //! Cancel Icon Button
-          BlocBuilder<MenuCubit, MenuState>(
+          BlocConsumer<MenuCubit, MenuState>(
             builder: (context, state) {
               return IconButton(
                 onPressed: () {
@@ -86,6 +91,7 @@ class CustomMealItem extends StatelessWidget {
                           confirmAction: () {
                             BlocProvider.of<MenuCubit>(context)
                                 .deleteMeal(mealModel.id);
+                            Navigator.pop(context);
                           },
                         );
                       }));
@@ -96,6 +102,11 @@ class CustomMealItem extends StatelessWidget {
                   size: 40,
                 ),
               );
+            },
+            listener: (BuildContext context, MenuState state) {
+              if (state is DeleteMealSuccessState) {
+                BlocProvider.of<MenuCubit>(context).getAllMeals();
+              }
             },
           ),
         ],

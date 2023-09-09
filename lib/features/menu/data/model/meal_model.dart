@@ -1,7 +1,7 @@
 class MealModel {
   final String name;
   final String description;
-  final double price;
+  final int price;
   final String howToSell;
   final List<String> images;
   final String category;
@@ -51,7 +51,7 @@ class GetAllMealsModel {
   factory GetAllMealsModel.fromJson(Map<String, dynamic> jsonData) {
     return GetAllMealsModel(
       message: jsonData['message'],
-      meals: jsonData['meals'].map<MealModel>((i) => MealModel.fromJson(i)),
+      meals: jsonData['meals'].map<MealModel>((i) => MealModel.fromJson(i)).toList(),
     );
   }
 }

@@ -39,6 +39,7 @@ class ChangeLangScreen extends StatelessWidget {
             Text(
               AppStrings.welcomeToChefApp.tr(context),
               style: appTheme().textTheme.bodyMedium,
+              textAlign: TextAlign.center,
             ),
             SizedBox(height: 54.h),
             //! Title 2

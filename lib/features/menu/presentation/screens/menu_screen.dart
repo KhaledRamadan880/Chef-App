@@ -2,6 +2,7 @@ import 'package:chef_app/core/database/local/app_locale.dart';
 import 'package:chef_app/core/util/color.dart';
 import 'package:chef_app/core/util/commons.dart';
 import 'package:chef_app/core/util/strings.dart';
+import 'package:chef_app/core/util/widgets/custom_loading_indicator.dart';
 import 'package:chef_app/core/util/widgets/primary_button.dart';
 import 'package:chef_app/features/menu/presentation/components/meal_item_component.dart';
 import 'package:chef_app/features/menu/presentation/cubit/menu_cubit.dart';
@@ -32,25 +33,27 @@ class MenuScreen extends StatelessWidget {
               builder: (context, state) {
                 final menuCubit = BlocProvider.of<MenuCubit>(context);
                 return Expanded(
-                  child: menuCubit.meals.isEmpty
-                      ? Text(
-                          'No Meals Found',
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyLarge!
-                              .copyWith(color: AppColors.black),
-                        )
-                      : ListView.builder(
-                          itemCount: menuCubit.meals.length,
-                          itemBuilder: (context, index) {
-                            return Column(
-                              children: [
-                                CustomMealItem(
-                                    mealModel: menuCubit.meals[index]),
-                              ],
-                            );
-                          },
-                        ),
+                  child: state is GetAllMealsLoadingState
+                      ? const CustomLoadingIndicator()
+                      : menuCubit.meals.isEmpty
+                          ? Text(
+                              'No Meals Found',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge!
+                                  .copyWith(color: AppColors.black),
+                            )
+                          : ListView.builder(
+                              itemCount: menuCubit.meals.length,
+                              itemBuilder: (context, index) {
+                                return Column(
+                                  children: [
+                                    CustomMealItem(
+                                        mealModel: menuCubit.meals[index]),
+                                  ],
+                                );
+                              },
+                            ),
                 );
               },
             ),

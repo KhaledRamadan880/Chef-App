@@ -50,12 +50,12 @@ class CreateNewPassScreen extends StatelessWidget {
                 //! Form
                 BlocConsumer<ForgetPassCubit, ForgetPassState>(
                   listener: (context, state) {
-                    if (state is changePassSuccess) {
+                    if (state is ChangePassSuccess) {
                       toast(message: state.message, state: ToastStates.success);
                       navigateReplacement(
                           context: context, route: Routes.login);
                     }
-                    if (state is changePassError) {
+                    if (state is ChangePassError) {
                       toast(message: state.message, state: ToastStates.error);
                     }
                   },
@@ -137,7 +137,7 @@ class CreateNewPassScreen extends StatelessWidget {
                           ),
                           SizedBox(height: 30.h),
                           //! Reset Button
-                          state is changePassLoading
+                          state is ChangePassLoading
                               ? const CustomLoadingIndicator()
                               : PrimaryButton(
                                   title: AppStrings.changePassword.tr(context),

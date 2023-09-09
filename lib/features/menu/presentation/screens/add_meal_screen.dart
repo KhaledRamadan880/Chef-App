@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:chef_app/core/database/local/app_locale.dart';
 import 'package:chef_app/core/util/color.dart';
 import 'package:chef_app/core/util/commons.dart';
 import 'package:chef_app/core/util/images.dart';
 import 'package:chef_app/core/util/strings.dart';
 import 'package:chef_app/core/util/widgets/custom_app_bar.dart';
+import 'package:chef_app/core/util/widgets/custom_loading_indicator.dart';
 import 'package:chef_app/core/util/widgets/custom_text_field.dart';
 import 'package:chef_app/core/util/widgets/primary_button.dart';
 import 'package:chef_app/features/menu/presentation/components/photo_select_dialog.dart';
@@ -29,72 +32,86 @@ class AddMealScreen extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(25),
           child: Center(
-            child: Column(
-              children: [
-                //! Image
-                SizedBox(
-                  height: 150.h,
-                  width: 150.w,
-                  child: Stack(
-                    children: [
-                      Align(
-                        alignment: Alignment.center,
-                        child: Image.asset(AppImages.addMeal),
-                      ),
-                      Positioned.directional(
-                        textDirection: Directionality.of(context),
-                        bottom: 0,
-                        end: 0,
-                        child: MaterialButton(
-                          onPressed: () {
-                            showDialog(
-                              context: context,
-                              builder: (context) {
-                                return PhotoSelectedDialog(
-                                  cameraOnTap: () {
-                                    Navigator.pop(context);
-                                    imagePicker(ImageSource.camera);
-                                  },
-                                  galleryOnTap: () {
-                                    Navigator.pop(context);
-                                    imagePicker(ImageSource.gallery);
-                                  },
-                                );
-                              },
-                            );
-                          },
-                          color: AppColors.primary,
-                          minWidth: 10,
-                          height: 35,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: const Icon(
-                            Icons.edit,
-                            color: AppColors.white,
-                            size: 15,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 24),
-                BlocConsumer<MenuCubit, MenuState>(
-                  listener: (context, state) {
-                    if (state is AddMealSeccessState) {
-                      toast(
-                          message: AppStrings.mealAddedSucessfully,
-                          state: ToastStates.success);
-                      Navigator.pop(context);
-                    }
-                  },
-                  builder: (context, state) {
-                    return Form(
+            child: BlocConsumer<MenuCubit, MenuState>(
+              listener: (context, state) {
+                if (state is AddMealSeccessState) {
+                  toast(
+                      message: AppStrings.mealAddedSucessfully,
+                      state: ToastStates.success);
+                  Navigator.pop(context);
+                  BlocProvider.of<MenuCubit>(context).getAllMeals();
+                }
+              },
+              builder: (context, state) {
+                final menuCubit = BlocProvider.of<MenuCubit>(context);
+                return Column(
+                  children: [
+                    Form(
                       key: BlocProvider.of<MenuCubit>(context).addMealKey,
                       child: Form(
                         child: Column(
                           children: [
+                            //! Image
+                            SizedBox(
+                              height: 150.h,
+                              width: 150.w,
+                              child: Stack(
+                                children: [
+                                  Align(
+                                    alignment: Alignment.center,
+                                    child: menuCubit.image != null
+                                        ? CircleAvatar(
+                                            radius: 75,
+                                            backgroundImage: FileImage(
+                                              File(menuCubit.image!.path),
+                                            ),
+                                          )
+                                        : Image.asset(AppImages.addMeal),
+                                  ),
+                                  Positioned.directional(
+                                    textDirection: Directionality.of(context),
+                                    bottom: 0,
+                                    end: 0,
+                                    child: MaterialButton(
+                                      onPressed: () {
+                                        showDialog(
+                                          context: context,
+                                          builder: (context) {                                           
+                                            return PhotoSelectedDialog(
+                                              cameraOnTap: () {
+                                                Navigator.pop(context);
+                                                imagePicker(ImageSource.camera)
+                                                    .then((value) => menuCubit
+                                                        .takePhoto(value));
+                                              },
+                                              galleryOnTap: () {
+                                                Navigator.pop(context);
+                                                imagePicker(ImageSource.gallery)
+                                                    .then((value) => menuCubit
+                                                        .takePhoto(value));
+                                              },
+                                            );
+                                          },
+                                        );
+                                      },
+                                      color: AppColors.primary,
+                                      minWidth: 10,
+                                      height: 35,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: const Icon(
+                                        Icons.edit,
+                                        color: AppColors.white,
+                                        size: 15,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 24),
+
                             //! Name TextField
                             CustomTextField(
                               hint: AppStrings.name.tr(context),
@@ -219,24 +236,27 @@ class AddMealScreen extends StatelessWidget {
                             ),
 
                             //! Add Meal Button
-                            PrimaryButton(
-                              title: AppStrings.addMeal.tr(context),
-                              onPressed: () {
-                                if (BlocProvider.of<MenuCubit>(context)
-                                    .addMealKey
-                                    .currentState!
-                                    .validate()) {
-                                  BlocProvider.of<MenuCubit>(context).addMeal();
-                                }
-                              },
-                            ),
+                            state is AddMealLoadingState
+                                ? const CustomLoadingIndicator()
+                                : PrimaryButton(
+                                    title: AppStrings.addMeal.tr(context),
+                                    onPressed: () {
+                                      if (BlocProvider.of<MenuCubit>(context)
+                                          .addMealKey
+                                          .currentState!
+                                          .validate()) {
+                                        BlocProvider.of<MenuCubit>(context)
+                                            .addMeal();
+                                      }
+                                    },
+                                  ),
                           ],
                         ),
                       ),
-                    );
-                  },
-                ),
-              ],
+                    )
+                  ],
+                );
+              },
             ),
           ),
         ),

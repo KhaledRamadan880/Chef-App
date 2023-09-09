@@ -38,6 +38,12 @@ class MenuCubit extends Cubit<MenuState> {
     emit(ChangeGroupValState());
   }
 
+  //! Take Photo Method
+  void takePhoto(value) {
+    image = value;
+    emit(TakePhotoSuccessState());
+  }
+
   //! Add Meal Method
   void addMeal() async {
     emit(AddMealLoadingState());

@@ -23,3 +23,5 @@ final class GetAllMealsLoadingState extends MenuState {}
 final class GetAllMealsSuccessState extends MenuState {}
 
 final class GetAllMealsErrorState extends MenuState {}
+
+final class TakePhotoSuccessState extends MenuState {}

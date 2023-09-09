@@ -62,7 +62,7 @@ class ForgetPassCubit extends Cubit<ForgetPassState> {
   TextEditingController codeController = TextEditingController();
   //* Reset Password Method
   void resetPass() async {
-    emit(changePassLoading());
+    emit(ChangePassLoading());
     final res = await authRepository.resetPass(
       email: emailController.text,
       newPAss: newPassController.text,
@@ -70,8 +70,8 @@ class ForgetPassCubit extends Cubit<ForgetPassState> {
       code: codeController.text,
     );
     res.fold(
-      (l) => emit(changePassError(l)),
-      (r) => emit(changePassSuccess(r)),
+      (l) => emit(ChangePassError(l)),
+      (r) => emit(ChangePassSuccess(r)),
     );
   }
 }

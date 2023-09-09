@@ -20,16 +20,16 @@ final class SendCodeErrorState extends ForgetPassState {
   SendCodeErrorState(this.message);
 }
 
-final class changePassLoading extends ForgetPassState {}
+final class ChangePassLoading extends ForgetPassState {}
 
-final class changePassSuccess extends ForgetPassState {
+final class ChangePassSuccess extends ForgetPassState {
   final String message;
 
-  changePassSuccess(this.message);
+  ChangePassSuccess(this.message);
 }
 
-final class changePassError extends ForgetPassState {
+final class ChangePassError extends ForgetPassState {
   final String message;
 
-  changePassError(this.message);
+  ChangePassError(this.message);
 }

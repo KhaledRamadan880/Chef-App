@@ -21,6 +21,7 @@ class MenuRepo {
     try {
       final res = await sl<ApiConsumer>().post(
         EndPoints.addMeal,
+        isFormData: true,
         data: {
           ApiKeys.mealImages: await uploadImagetoApi(image),
           ApiKeys.name: mealName,
@@ -30,7 +31,7 @@ class MenuRepo {
           ApiKeys.howToSell: howToSell,
         },
       );
-      return Right(res[ApiKeys.message]);
+      return Right(res.data[ApiKeys.message]);
     } on ServerExceptions catch (e) {
       return Left(e.errorModel.errorMessage);
     }
@@ -42,7 +43,7 @@ class MenuRepo {
       final res = await sl<ApiConsumer>().delete(
         EndPoints.deleteMealEndPoint(id),
       );
-      return Right(res[ApiKeys.message]);
+      return Right(res.data[ApiKeys.message]);
     } on ServerExceptions catch (e) {
       return Left(e.errorModel.errorMessage);
     }
@@ -54,7 +55,7 @@ class MenuRepo {
       final res = await sl<ApiConsumer>().get(
         EndPoints.getAllChefMeals(sl<Cache>().getStringData(ApiKeys.id)),
       );
-      return Right(GetAllMealsModel.fromJson(res));
+      return Right(GetAllMealsModel.fromJson(res.data));
     } on ServerExceptions catch (e) {
       return Left(e.errorModel.errorMessage);
     }

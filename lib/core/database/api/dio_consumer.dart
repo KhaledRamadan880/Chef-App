@@ -61,13 +61,14 @@ class DioConsumer extends ApiConsumer {
   @override
   Future patch(
     String path, {
-    Object? data,
+    dynamic data,
     Map<String, dynamic>? queryParameters,
+    bool isFormData = false,
   }) async {
     try {
       var res = await dio.patch(
         path,
-        data: data,
+        data: isFormData? FormData.fromMap(data): data,
         queryParameters: queryParameters,
       );
       return res;
@@ -79,13 +80,14 @@ class DioConsumer extends ApiConsumer {
   @override
   Future post(
     String path, {
-    Object? data,
+    dynamic data,
     Map<String, dynamic>? queryParameters,
+    bool isFormData = false,
   }) async {
     try {
       var res = await dio.post(
         path,
-        data: data,
+        data:  isFormData? FormData.fromMap(data): data,
         queryParameters: queryParameters,
       );
       return res;
@@ -123,8 +125,8 @@ handleExceptions(e) {
     case DioExceptionType.sendTimeout:
       throw SendTimeoutException(ErrorModel.fromJson(e.response!.data));
     case DioExceptionType.unknown:
-      throw SendTimeoutException(ErrorModel.fromJson(e.response!.data));
+      throw SendTimeoutException(ErrorModel(status: 500, errorMessage: e.toString()));
     default:
-      throw ServerExceptions(ErrorModel.fromJson(e.response!.data));
+      throw ServerExceptions(ErrorModel(status: 500, errorMessage: e.toString()));
   }
 }
