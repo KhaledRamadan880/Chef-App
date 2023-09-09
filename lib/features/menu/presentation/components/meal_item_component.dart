@@ -32,8 +32,8 @@ class CustomMealItem extends StatelessWidget {
             child: CachedNetworkImage(
               imageUrl: mealModel.images[0],
               placeholder: (context, url) => Shimmer.fromColors(
-                baseColor: AppColors.grey,
-                highlightColor: AppColors.white,
+                baseColor: AppColors.white,
+                highlightColor: AppColors.grey,
                 child: Container(
                   width: 60.w,
                   height: 60.h,
