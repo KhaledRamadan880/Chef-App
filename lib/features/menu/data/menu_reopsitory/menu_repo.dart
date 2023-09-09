@@ -13,7 +13,7 @@ class MenuRepo {
   Future<Either<String, String>> addMeal({
     required XFile image,
     required String mealName,
-    required String mealPrice,
+    required double mealPrice,
     required String mealDesc,
     required String mealCategory,
     required String howToSell,
@@ -49,12 +49,12 @@ class MenuRepo {
   }
 
   //! Get All Meal
-  Future<Either<String, GetAllMealModel>> getALlMeals() async {
+  Future<Either<String, GetAllMealsModel>> getALlMeals() async {
     try {
       final res = await sl<ApiConsumer>().get(
         EndPoints.getAllChefMeals(sl<Cache>().getStringData(ApiKeys.id)),
       );
-      return Right(GetAllMealModel.fromJson(res));
+      return Right(GetAllMealsModel.fromJson(res));
     } on ServerExceptions catch (e) {
       return Left(e.errorModel.errorMessage);
     }

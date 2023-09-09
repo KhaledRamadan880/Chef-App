@@ -22,7 +22,7 @@ void main() async {
     BlocProvider(create: (context) => sl<LoginCubit>()),
     BlocProvider(create: (context) => sl<ForgetPassCubit>()),
     BlocProvider(create: (context) => sl<HomeCubit>()),
-    BlocProvider(create: (context) => sl<MenuCubit>()),
+    BlocProvider(create: (context) => sl<MenuCubit>()..getAllMeals()),
     BlocProvider(create: (context) => sl<ProfileCubit>()),
   ], child: const MyApp()));
 }

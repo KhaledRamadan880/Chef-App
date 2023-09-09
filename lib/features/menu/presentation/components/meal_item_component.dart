@@ -4,22 +4,25 @@ import 'package:chef_app/core/util/color.dart';
 import 'package:chef_app/core/util/strings.dart';
 import 'package:chef_app/core/util/theme/theme.dart';
 import 'package:chef_app/core/util/widgets/custom_alert_dialog.dart';
+import 'package:chef_app/features/menu/data/model/meal_model.dart';
+import 'package:chef_app/features/menu/presentation/cubit/menu_cubit.dart';
+import 'package:chef_app/features/menu/presentation/cubit/menu_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 
 class CustomMealItem extends StatelessWidget {
   const CustomMealItem({
     super.key,
-    required this.imageUrl,
+    required this.mealModel,
   });
-  final String imageUrl;
+  final MealModel mealModel;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: 327.w,
       height: 120.h,
-      // padding: const EdgeInsets.symmetric(horizontal: 15),
       child: Row(
         children: [
           //! Image
@@ -27,7 +30,7 @@ class CustomMealItem extends StatelessWidget {
             width: 80.w,
             height: 80.h,
             child: CachedNetworkImage(
-              imageUrl: imageUrl,
+              imageUrl: mealModel.images[0],
               placeholder: (context, url) => Shimmer.fromColors(
                 baseColor: AppColors.grey,
                 highlightColor: AppColors.white,
@@ -50,19 +53,19 @@ class CustomMealItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Kitchen',
+                mealModel.name,
                 style: appTheme().textTheme.labelMedium!.copyWith(
                       color: AppColors.black,
                     ),
               ),
               Text(
-                'Chicken hint',
+                mealModel.description,
                 style: appTheme().textTheme.labelMedium!.copyWith(
                       color: AppColors.grey,
                     ),
               ),
               Text(
-                '200 LE',
+                mealModel.price.toString(),
                 style: appTheme().textTheme.labelMedium!.copyWith(
                       color: AppColors.grey,
                     ),
@@ -71,22 +74,29 @@ class CustomMealItem extends StatelessWidget {
           ),
           const Spacer(),
           //! Cancel Icon Button
-          IconButton(
-            onPressed: () {
-              showDialog(
-                  context: context,
-                  builder: ((context) {
-                    return CustomAlertDialog(
-                      message: AppStrings.mealDelete.tr(context),
-                      confirmAction: () {},
-                    );
-                  }));
+          BlocBuilder<MenuCubit, MenuState>(
+            builder: (context, state) {
+              return IconButton(
+                onPressed: () {
+                  showDialog(
+                      context: context,
+                      builder: ((context) {
+                        return CustomAlertDialog(
+                          message: AppStrings.mealDelete.tr(context),
+                          confirmAction: () {
+                            BlocProvider.of<MenuCubit>(context)
+                                .deleteMeal(mealModel.id);
+                          },
+                        );
+                      }));
+                },
+                icon: const Icon(
+                  Icons.cancel,
+                  color: AppColors.red,
+                  size: 40,
+                ),
+              );
             },
-            icon: const Icon(
-              Icons.cancel,
-              color: AppColors.red,
-              size: 40,
-            ),
           ),
         ],
       ),
