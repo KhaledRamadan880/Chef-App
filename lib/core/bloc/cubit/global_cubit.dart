@@ -26,10 +26,17 @@ class GlobalCubit extends Cubit<GlobalState> {
 
   //! Change Language
   String language = sl<Cache>().getStringData('lang') ?? 'en';
-
   void changeLang(String lang) {
     emit(ChangeLangLoadingState());
     sl<Cache>().setData('lang', lang);
+    language = sl<Cache>().getStringData('lang')!;
+    emit(ChangeLangSuccessState());
+  }
+
+  bool switchOn = false;
+  void switchChangeLang(newValue) {
+    switchOn = !switchOn;
+    sl<Cache>().setData('lang', switchOn? 'ar': 'en');
     language = sl<Cache>().getStringData('lang')!;
     emit(ChangeLangSuccessState());
   }

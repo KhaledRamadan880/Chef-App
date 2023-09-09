@@ -9,6 +9,7 @@ import 'package:chef_app/features/menu/presentation/screens/menu_screen.dart';
 import 'package:chef_app/features/profle/presentation/screens/change_password_screen.dart';
 import 'package:chef_app/features/profle/presentation/screens/edit_profile.dart';
 import 'package:chef_app/features/profle/presentation/screens/profile_screen.dart';
+import 'package:chef_app/features/profle/presentation/screens/settings_screen.dart';
 import 'package:flutter/material.dart';
 
 class Routes {
@@ -23,6 +24,7 @@ class Routes {
   static const String addMeal = '/addMeal';
   static const String profile = '/profile';
   static const String editProfile = '/editProfile';
+  static const String setting = '/setting';
 
 }
 
@@ -51,6 +53,8 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => const EditProfileScreen());
       case Routes.changePassword:
         return MaterialPageRoute(builder: (_) => const ChangePasswordScreen());
+      case Routes.setting:
+        return MaterialPageRoute(builder: (_) => const SettingScreen());
 
     }
     return null;
