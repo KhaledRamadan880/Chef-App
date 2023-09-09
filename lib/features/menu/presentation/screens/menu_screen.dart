@@ -36,13 +36,15 @@ class MenuScreen extends StatelessWidget {
                   child: state is GetAllMealsLoadingState
                       ? const CustomLoadingIndicator()
                       : menuCubit.meals.isEmpty
-                          ? Text(
-                              'No Meals Found',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyLarge!
-                                  .copyWith(color: AppColors.black),
-                            )
+                          ? Center(
+                            child: Text(
+                                'No Meals Found',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleMedium!
+                                    .copyWith(color: AppColors.black),
+                              ),
+                          )
                           : ListView.builder(
                               itemCount: menuCubit.meals.length,
                               itemBuilder: (context, index) {

@@ -1,5 +1,7 @@
+import 'package:chef_app/core/database/cache/cache.dart';
 import 'package:chef_app/core/database/local/app_locale.dart';
 import 'package:chef_app/core/routes/routes.dart';
+import 'package:chef_app/core/services/service_locator.dart';
 import 'package:chef_app/core/util/color.dart';
 import 'package:chef_app/core/util/commons.dart';
 import 'package:chef_app/core/util/strings.dart';
@@ -77,14 +79,14 @@ class ProfileScreen extends StatelessWidget {
                   BlocConsumer<ProfileCubit, ProfileState>(
                     listener: (context, state) {
                       if (state is LogoutSuccessState) {
-                        toast(
-                            message: state.message, state: ToastStates.success);
                         navigateReplacement(
                             context: context, route: Routes.login);
+                        sl<Cache>().clear();
+                        toast(
+                            message: state.message, state: ToastStates.success);
                       }
                       if (state is LogoutErrorState) {
-                        toast(
-                            message: state.message, state: ToastStates.error);                                                    
+                        toast(message: state.message, state: ToastStates.error);
                       }
                     },
                     builder: (context, state) {
