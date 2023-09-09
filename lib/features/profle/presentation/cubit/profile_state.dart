@@ -21,3 +21,16 @@ final class ChangePassSuccessState extends ProfileState {
 }
 
 final class ChangePassLoadingState extends ProfileState {}
+
+final class UpdateProfileSuccessState extends ProfileState {
+  final String message;
+
+  UpdateProfileSuccessState(this.message);
+}
+final class UpdateProfileErrorState extends ProfileState {
+  final String message;
+
+  UpdateProfileErrorState(this.message);
+}
+final class UpdateProfileLoadingState extends ProfileState {}
+

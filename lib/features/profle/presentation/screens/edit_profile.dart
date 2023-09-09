@@ -8,7 +8,9 @@ import 'package:chef_app/core/util/widgets/custom_app_bar.dart';
 import 'package:chef_app/core/util/widgets/custom_text_field.dart';
 import 'package:chef_app/core/util/widgets/primary_button.dart';
 import 'package:chef_app/features/menu/presentation/components/photo_select_dialog.dart';
+import 'package:chef_app/features/profle/presentation/cubit/profile_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -136,7 +138,7 @@ class EditProfileScreen extends StatelessWidget {
                 PrimaryButton(
                   title: AppStrings.update.tr(context),
                   onPressed: () {
-                    navigateReplacement(context: context, route: Routes.home);
+                    BlocProvider.of<ProfileCubit>(context).updateProfile();
                   },
                 ),
               ],

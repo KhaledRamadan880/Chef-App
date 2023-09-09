@@ -14,6 +14,17 @@ class ProfileCubit extends Cubit<ProfileState> {
   GlobalKey<FormState> changePassKey = GlobalKey<FormState>();
 
   final ProfileRepo profileRepo;
+
+  //! Update Profile
+  void updateProfile() async {
+    emit(UpdateProfileLoadingState());
+    final res = await profileRepo.updataProfile();
+    res.fold(
+      (l) => emit(UpdateProfileErrorState(l)),
+      (r) => emit(UpdateProfileSuccessState(r)),
+    );
+  }
+
   //! Change Password
   void changePass() async {
     emit(ChangePassLoadingState());
