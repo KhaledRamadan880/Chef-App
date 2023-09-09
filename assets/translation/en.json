@@ -70,6 +70,10 @@
     "mealDelete": "Delete Meal",
     "addMeal": "Add Meal",
     "category": "Category",
-    "price": "Price"
+    "price": "Price",
+    "brand": "Brand",
+    "minimumCharge": "Minimum Charge",
+    "location": "location",
+    "update": "Update"
 
 }

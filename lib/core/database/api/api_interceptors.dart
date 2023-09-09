@@ -12,16 +12,15 @@ class ApiInterCeptors extends Interceptor {
             : null;
     super.onRequest(options, handler);
   }
-
+  
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {    
     super.onResponse(response, handler);
     // return handler.next(response);
   }
-
+  
   @override
-  void onError(DioException err, ErrorInterceptorHandler handler) {
-    // TODO: implement onError
+  void onError(DioException err, ErrorInterceptorHandler handler) {    
     super.onError(err, handler);
   }
 }

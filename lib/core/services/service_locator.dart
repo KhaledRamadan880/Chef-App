@@ -7,6 +7,8 @@ import 'package:chef_app/features/auth/presentation/cubits/forget_pass_cubit/for
 import 'package:chef_app/features/auth/presentation/cubits/login_cubit/login_cubit.dart';
 import 'package:chef_app/features/home/home_cubit/home_cubit.dart';
 import 'package:chef_app/features/menu/presentation/cubit/menu_cubit.dart';
+import 'package:chef_app/features/profle/data/repository/profile_repo.dart';
+import 'package:chef_app/features/profle/presentation/cubit/profile_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
@@ -18,8 +20,10 @@ void initServiceLocator() {
   sl.registerLazySingleton(() => ForgetPassCubit(sl()));
   sl.registerLazySingleton(() => HomeCubit());
   sl.registerLazySingleton(() => MenuCubit());
+  sl.registerLazySingleton(() => ProfileCubit(sl()));
 
   sl.registerLazySingleton(() => AuthRepository());
+  sl.registerLazySingleton(() => ProfileRepo());
 
   sl.registerLazySingleton(() => Cache());
   sl.registerLazySingleton(() => Dio());

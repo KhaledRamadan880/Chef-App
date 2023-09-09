@@ -6,6 +6,9 @@ import 'package:chef_app/features/auth/presentation/screens/splash_screen.dart';
 import 'package:chef_app/features/home/screens/home_screen.dart';
 import 'package:chef_app/features/menu/presentation/screens/add_meal_screen.dart';
 import 'package:chef_app/features/menu/presentation/screens/menu_screen.dart';
+import 'package:chef_app/features/profle/presentation/screens/change_password_screen.dart';
+import 'package:chef_app/features/profle/presentation/screens/edit_profile.dart';
+import 'package:chef_app/features/profle/presentation/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 
 class Routes {
@@ -14,9 +17,13 @@ class Routes {
   static const String login = '/login';
   static const String sendCode = '/sendCode';
   static const String createNewPass = '/createNewPass';
+  static const String changePassword = '/changePassword';
   static const String home = '/home';
   static const String menu = '/menu';
   static const String addMeal = '/addMeal';
+  static const String profile = '/profile';
+  static const String editProfile = '/editProfile';
+
 }
 
 class AppRoutes {
@@ -38,6 +45,13 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => const AddMealScreen());
       case Routes.home:
         return MaterialPageRoute(builder: (_) => const HomeScreen());
+      case Routes.profile:
+        return MaterialPageRoute(builder: (_) => const ProfileScreen());
+      case Routes.editProfile:
+        return MaterialPageRoute(builder: (_) => const EditProfileScreen());
+      case Routes.changePassword:
+        return MaterialPageRoute(builder: (_) => const ChangePasswordScreen());
+
     }
     return null;
   }

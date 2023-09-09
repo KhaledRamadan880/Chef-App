@@ -77,4 +77,8 @@ class AppStrings {
   static const String changePassword = 'changePassword';
   static const String ok = 'ok';
   static const String cancel = 'cancel';
+  static const String brand = 'brand';
+  static const String minimumCharge = 'minimumCharge';
+  static const String location = 'location';
+  static const String update = 'update';
 }

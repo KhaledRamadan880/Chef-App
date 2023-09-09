@@ -23,7 +23,7 @@ class AddMealScreen extends StatelessWidget {
       appBar: customAppBar(
         title: AppStrings.addMeal.tr(context),
         context: context,
-        route: '/menu',
+        route: '/home',
       ),
       body: SingleChildScrollView(
         child: Padding(

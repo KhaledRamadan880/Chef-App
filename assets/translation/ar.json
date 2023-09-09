@@ -70,5 +70,9 @@
     "mealDelete": "حذف الوجبة",
     "addMeal": "اضافة وجبة",
     "category": "النوع",
-    "price": "السعر"
+    "price": "السعر",
+    "brand": "صنف",
+    "minimumCharge": "الضريبة",
+    "location": "الموقع",
+    "update": "تحديث"
 }

@@ -5,6 +5,7 @@ import 'package:chef_app/features/auth/presentation/cubits/forget_pass_cubit/for
 import 'package:chef_app/features/auth/presentation/cubits/login_cubit/login_cubit.dart';
 import 'package:chef_app/features/home/home_cubit/home_cubit.dart';
 import 'package:chef_app/features/menu/presentation/cubit/menu_cubit.dart';
+import 'package:chef_app/features/profle/presentation/cubit/profile_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -22,5 +23,6 @@ void main() async {
     BlocProvider(create: (context) => sl<ForgetPassCubit>()),
     BlocProvider(create: (context) => sl<HomeCubit>()),
     BlocProvider(create: (context) => sl<MenuCubit>()),
+    BlocProvider(create: (context) => sl<ProfileCubit>()),
   ], child: const MyApp()));
 }
